@@ -5,7 +5,19 @@ import Foundation
 import PlaygroundSupport
 
 struct SearchResult: Decodable {
-    let search_results: [Listing]
+    let searchResult: [Listing]
+    
+    enum searchKey: String, CodingKey {
+        case searchResult = "search_results"
+    }
+    init(searchResult: [Listing]) {
+        self.searchResult = searchResult
+    }
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: searchKey.self)
+        let searchResult = try container.decode([Listing].self, forKey: .searchResult)
+        self.init(searchResult: searchResult)
+    }
 }
 
 struct PrimaryHost: Decodable {
@@ -48,11 +60,7 @@ struct Listing {
 
 //serialize data
 extension Listing: Decodable {
-    
-//    enum SearchKeys: String, CodingKey {
-//        case searchResults = "search_results"
-//    }
-    
+
     enum TopLevelKeys: String, CodingKey {
         case listing
     }
@@ -73,17 +81,9 @@ extension Listing: Decodable {
         
         let Listcontainer = try container.nestedContainer(keyedBy: ListingKeys.self, forKey: .listing)
 
-        
-        let hostInfo = try Listcontainer.nestedContainer(keyedBy: PrimaryHostKeys.self, forKey: .primaryHost)
-    
         let bedrooms: Double = try Listcontainer.decode(Double.self, forKey: .bedrooms)
         let city: String = try Listcontainer.decode(String.self, forKey: .city)
         let id: Int = try Listcontainer.decode(Int.self, forKey: .id)
-        
-//        let primeContainer = try hostInfo.nestedContainer(keyedBy: PrimaryHostKeys.self, forKey: .primaryHost)
-//        let firstName: String = try primeContainer.decode(String.self, forKey: .firstName)
-//        let pictureUrl = try primeContainer.decodeIfPresent(String.self, forKey: .pictureUrl)
-//
 
         let primaryHost = try Listcontainer.decode(PrimaryHost.self, forKey: .primaryHost)
         
@@ -119,7 +119,7 @@ class Networking {
                     return completion(Result.failure(NetworkError.couldNotParseJSON))
                 }
         
-                completion(Result.success(info.search_results))
+                completion(Result.success(info.searchResult))
                 }
         }.resume()
             
