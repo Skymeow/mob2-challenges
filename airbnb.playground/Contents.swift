@@ -20,6 +20,21 @@ struct SearchResult: Decodable {
     }
 }
 
+struct Listing {
+    let bedrooms: Double
+    let city: String
+    let id: Int
+    
+    let primaryHost: PrimaryHost
+    
+//    init(bedrooms: Double, city: String, id: Int, primaryHost: PrimaryHost){
+//        self.bedrooms = bedrooms
+//        self.city = city
+//        self.id = id
+//        self.primaryHost = primaryHost
+//    }
+}
+
 struct PrimaryHost: Decodable {
     let firstName: String
     let pictureUrl: String?
@@ -41,21 +56,6 @@ struct PrimaryHost: Decodable {
         self.init(firstName: firstName, pictureUrl: pictureUrl)
     }
     
-}
-
-struct Listing {
-    let bedrooms: Double
-    let city: String
-    let id: Int
-    
-    let primaryHost: PrimaryHost
-    
-    init(bedrooms: Double, city: String, id: Int, primaryHost: PrimaryHost){
-        self.bedrooms = bedrooms
-        self.city = city
-        self.id = id
-        self.primaryHost = primaryHost
-    }
 }
 
 //serialize data
