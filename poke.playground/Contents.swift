@@ -28,7 +28,7 @@ struct Poke: Decodable {
 
 struct Abilities: Decodable {
     let isHidden: Bool
-    let abilitiy: Ability
+    let ability: Ability
     
     enum searchKey: String, CodingKey {
         case isHidden = "is_hidden"
@@ -40,9 +40,9 @@ struct Abilities: Decodable {
         self.ability = ability
     }
     init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: searchKey.self )
+        let container = try decoder.container(keyedBy: searchKey.self)
         let isHidden = try container.decode(Bool.self, forKey: .isHidden)
-        let ability = try container.decode(Ability.self, forkey: .ability)
+        let ability = try container.decode(Ability.self, forKey: .ability)
         self.init(isHidden: isHidden, ability: ability)
         
     }
@@ -50,19 +50,60 @@ struct Abilities: Decodable {
 }
 
 struct Ability: Decodable {
-    let name: String
+    let abilityName: String
     let url: String?
     
     enum searchKey: String, CodingKey {
-        case name
+        case abilityName = "name"
         case url
     }
     
+    init(abilityName: String, url: String) {
+        self.abilityName = abilityName
+        self.url = url
+    }
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: searchKey.self)
+        let abilityName = try container.decode(String.self, forKey: .abilityName)
+        let url = try container.decode(String.self, forKey: .url)
+        self.init(abilityName: abilityName, url: url)
+    }
     
+}
+
+enum Result<T> {
+    case success(T)
+    case failure(NetworkError)
+}
+
+enum NetworkError: Error {
+    case unknown
+    case couldNotParseJSON
 }
 
 class MyViewController : UIViewController {
     override func loadView() {
+//        super.loadView()
+//        networking request
+        let session = URLSession.shared
+        let url = URL(string: "https://pokeapi.co/api/v2/pokemon/1/")!
+        func getInfo(completion: @escaping(Result<Poke>) -> Void) {
+            let request = URLRequest(url: url)
+            session.dataTask(with: request) { (data, response, error) in
+                if let data = data {
+                    let decoder = JSONDecoder()
+                    guard  let info = try? decoder.decode(Poke.self, from: data) else {
+                        return completion(Result.failure(NetworkError.couldNotParseJSON))
+                    }
+                    completion(Result.success(info))
+                }
+            }.resume()
+        }
+        
+        getInfo(){ (response) in
+            print(response)
+            
+        }
         let view = UIView()
         view.backgroundColor = .white
 
