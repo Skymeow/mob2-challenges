@@ -37,18 +37,18 @@ struct Listing {
 
 struct PrimaryHost: Decodable {
     let firstName: String
-    let pictureUrl: String?
+    let pictureUrl: String
     
     enum HostKey: String, CodingKey {
         case firstName = "first_name"
         case pictureUrl = "picture_url"
     }
     
-    init(firstName: String, pictureUrl: String) {
+    init(firstName: String, pictureUrl: String?) {
         self.firstName = firstName
-        self.pictureUrl = pictureUrl
+//        nil coalesion unwrap the optional object , if nil then "", or else umwrap
+        self.pictureUrl = pictureUrl ?? ""
     }
-    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: HostKey.self)
         let firstName = try container.decode(String.self, forKey: .firstName)

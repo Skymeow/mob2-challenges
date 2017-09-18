@@ -51,7 +51,7 @@ struct Abilities: Decodable {
 
 struct Ability: Decodable {
     let abilityName: String
-    let url: String?
+    let url: String
     
     enum searchKey: String, CodingKey {
         case abilityName = "name"
