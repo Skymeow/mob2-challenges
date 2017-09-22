@@ -39,7 +39,7 @@ extension Listing: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: originalLayer.self)
         var unkeyedNestedContainer = try container.nestedUnkeyedContainer(forKey: .searchResults)
-//        get to firstlayer container
+        //        get to firstlayer container
         var nestedContainer = try unkeyedNestedContainer.nestedContainer(keyedBy: firstLayer.self)
         var nestedContainer1 = try nestedContainer.nestedContainer(keyedBy: additionalKeys.self, forKey: .listing)
         let name = try nestedContainer1.decodeIfPresent(String.self, forKey: .name)
@@ -85,5 +85,4 @@ let result = Network()
 result.getInfo() {(response) in
     print(response)
 }
-
 PlaygroundPage.current.needsIndefiniteExecution = true

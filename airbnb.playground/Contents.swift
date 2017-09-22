@@ -1,5 +1,3 @@
-//: Playground - noun: a place where people can play
-
 import UIKit
 import Foundation
 import PlaygroundSupport
@@ -27,12 +25,12 @@ struct Listing {
     
     let primaryHost: PrimaryHost
     
-//    init(bedrooms: Double, city: String, id: Int, primaryHost: PrimaryHost){
-//        self.bedrooms = bedrooms
-//        self.city = city
-//        self.id = id
-//        self.primaryHost = primaryHost
-//    }
+    //    init(bedrooms: Double, city: String, id: Int, primaryHost: PrimaryHost){
+    //        self.bedrooms = bedrooms
+    //        self.city = city
+    //        self.id = id
+    //        self.primaryHost = primaryHost
+    //    }
 }
 
 struct PrimaryHost: Decodable {
@@ -46,7 +44,7 @@ struct PrimaryHost: Decodable {
     
     init(firstName: String, pictureUrl: String?) {
         self.firstName = firstName
-//        nil coalesion unwrap the optional object , if nil then "", or else umwrap
+        //        nil coalesion unwrap the optional object , if nil then "", or else umwrap
         self.pictureUrl = pictureUrl ?? ""
     }
     init(from decoder: Decoder) throws {
@@ -60,7 +58,7 @@ struct PrimaryHost: Decodable {
 
 //serialize data
 extension Listing: Decodable {
-
+    
     enum TopLevelKeys: String, CodingKey {
         case listing
     }
@@ -80,11 +78,11 @@ extension Listing: Decodable {
         let container = try decoder.container(keyedBy: TopLevelKeys.self)
         
         let Listcontainer = try container.nestedContainer(keyedBy: ListingKeys.self, forKey: .listing)
-
+        
         let bedrooms: Double = try Listcontainer.decode(Double.self, forKey: .bedrooms)
         let city: String = try Listcontainer.decode(String.self, forKey: .city)
         let id: Int = try Listcontainer.decode(Int.self, forKey: .id)
-
+        
         let primaryHost = try Listcontainer.decode(PrimaryHost.self, forKey: .primaryHost)
         
         
@@ -110,7 +108,7 @@ class Networking {
     func getInfo(completion: @escaping(Result<[Listing]>) -> Void) {
         let request = URLRequest(url: url)
         
-
+        
         session.dataTask(with: request) { (data, response, error) in
             if let data = data {
                 
@@ -118,19 +116,16 @@ class Networking {
                 guard let info = try? decoder.decode(SearchResult.self, from: data) else {
                     return completion(Result.failure(NetworkError.couldNotParseJSON))
                 }
-        
+                
                 completion(Result.success(info.searchResult))
-                }
-        }.resume()
-            
-         }
- }
+            }
+            }.resume()
+        
+    }
+}
 
 let result = Networking()
 result.getInfo() {(response) in
     print(response)
 }
-PlaygroundPage.current.needsIndefiniteExecution = true 
-
-
-
+PlaygroundPage.current.needsIndefiniteExecution = true
