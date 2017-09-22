@@ -10,8 +10,18 @@ import UIKit
 
 class ViewController: UIViewController {
 
+//    var products : Product = [] {
+//        didSet{
+//
+//        }
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Networking.netWorking { (products) in
+            print(products)
+        }
         // Do any additional setup after loading the view, typically from a nib.
     }
 

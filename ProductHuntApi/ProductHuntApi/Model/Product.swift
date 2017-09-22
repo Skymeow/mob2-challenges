@@ -119,7 +119,7 @@ extension URL {
         let URLString: String = String(format: "%@?%@", self.absoluteString, _parametersDictionary.queryParameters)
           return URL(string: URLString)!
         }
-//    formatting the query parameters with an ascii table reference therefore we can return a json file 
+//    formatting the query parameters with an ascii table reference therefore we can return a json file
 }
  
 
