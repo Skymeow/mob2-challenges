@@ -13,15 +13,17 @@ struct ProductHunt: Decodable {
 }
 
 struct Post {
-    let name: String?
-    let tagline: String?
-    let votes_count: Int?
-    let imageURL: String?
-    init(name: String?, tagline: String?, votes_count: Int?, imageURL: String?) {
+    let name: String
+    let tagline: String
+    let votes_count: Int
+    let imageURL: String
+    let id: Int
+    init(name: String, tagline: String, votes_count: Int, imageURL: String, id: Int) {
         self.name = name
         self.tagline = tagline
         self.votes_count = votes_count
         self.imageURL = imageURL
+        self.id = id
     }
 }
 
@@ -34,6 +36,7 @@ extension Post: Decodable {
         case tagline
         case votesCount = "votes_count"
         case thumbnail
+        case id
     }
     enum ImageKey: String, CodingKey {
         case imageURL = "image_url"
@@ -42,11 +45,12 @@ extension Post: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: ResultKeys.self)
         let name = try container.decodeIfPresent(String.self, forKey: .name) ?? "The name for this product is not available"
+        let id = try container.decodeIfPresent(Int.self, forKey: .id) ?? 0
         let tagline = try container.decodeIfPresent(String.self, forKey: .tagline) ?? "The tagline is not here"
         let votesCount = try container.decodeIfPresent(Int.self, forKey: .votesCount) ?? 0
         let thumbnailContainer = try container.nestedContainer(keyedBy: ImageKey.self, forKey: .thumbnail)
-        let imageURL = try thumbnailContainer.decodeIfPresent(String.self, forKey: .imageURL) ?? "No image"
-        self.init(name: name, tagline: tagline, votes_count: votesCount, imageURL: imageURL)
+        let imageURL = try thumbnailContainer.decodeIfPresent(String.self, forKey: .imageURL) ?? "image"
+        self.init(name: name, tagline: tagline, votes_count: votesCount, imageURL: imageURL, id: id)
     }
 }
 
@@ -61,7 +65,7 @@ enum Result<T> {
 }
 
 class Networking {
-    static func netWorking(completion: @escaping (Result<[Post]>) -> Void) {
+    static func netWorking(completion: @escaping ([Post]) -> Void) {
         let session = URLSession.shared
 //        let dg = DispatchGroup()
         var url = URL(string: "https://api.producthunt.com/v1/posts")
@@ -82,9 +86,9 @@ class Networking {
         session.dataTask(with: request) { (data, response, error) in
             if let data = data {
                 guard let producthunt = try? JSONDecoder().decode(ProductHunt.self, from: data) else {
-                    return completion(Result.failure(NetworkError.couldNotParseJSON))
+                    return
                 }
-                completion(Result.success(producthunt.posts))
+                completion(producthunt.posts)
                 }
             }.resume()
      }

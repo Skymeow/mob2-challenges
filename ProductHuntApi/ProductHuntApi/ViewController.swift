@@ -9,18 +9,25 @@
 import UIKit
 
 class ViewController: UIViewController {
-
-//    var products : Product = [] {
-//        didSet{
-//
-//        }
-//    }
+  
+    @IBOutlet weak var productsTableView: UITableView!
+    var post : [Post] = [] {
+        didSet{
+            DispatchQueue.main.async {
+                self.productsTableView.reloadData()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         Networking.netWorking { (products) in
             print(products)
+            self.post = products
+            DispatchQueue.main.async {
+                self.productsTableView.reloadData()
+            }
         }
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -32,4 +39,48 @@ class ViewController: UIViewController {
 
 
 }
+
+
+extension ViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+        return post.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let eachPost = post[indexPath.row]
+        if eachPost.name != nil {
+            cell.textLabel?.text = eachPost.name
+            cell.detailTextLabel?.text = eachPost.tagline
+//            var nameLabel = UILabel()
+//            var taglineLabel = UILabel()
+//            nameLabel.text = eachPost.name
+//            nameLabel = UILabel(frame: CGRect(self.frame.width - 100, 10, 100.0, 40))
+//            cell.addSubview(nameLabel)
+//            cell.addSubview(taglineLabel)
+//            cell.textLabel?.text = eachPost.name
+//
+//            cell.textLabel?.text = eachPost.tagline
+        }
+        
+        if eachPost.imageURL == "image" {
+            DispatchQueue.main.async {
+                cell.imageView?.image = UIImage(named: "phdefault.jpg")
+            }
+        }
+        
+            if eachPost.imageURL != "image" {
+                DispatchQueue.main.async {
+                    cell.imageView?.loadImageUsingCacheWithUrlString(urlString: eachPost.imageURL)
+                }
+            }
+        
+        return cell
+        
+    }
+}
+
+//extension ViewController: UITableViewDelegate {
+//
+//}
 
