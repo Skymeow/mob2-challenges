@@ -8,16 +8,27 @@
 
 import UIKit
 
-class PostsTableViewController: UITableViewController {
-
+class CommentsTableViewController: UITableViewController {
+    var postId: Int = 0
+    var comments: [Comment] = [] {
+        didSet{
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        clickPost()
+        Network.networking(postId: postId) { (data) in
+            print(data)
+            self.comments = data
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,27 +36,34 @@ class PostsTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    func clickPost() {
+        let click = UITapGestureRecognizer(target: self, action: #selector(CommentsTableViewController.tap(_:)))
+        view.addGestureRecognizer(click)
+    }
+    
+    @objc func tap(_ gesture:UIGraphicsRenderer) {
+        self.navigationController?.popViewController(animated: true)
+    }
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
+//    override func numberOfSections(in tableView: UITableView) -> Int {
+//        // #warning Incomplete implementation, return the number of sections
+//        return 0
+//    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return comments.count
     }
 
-    /*
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let comment = comments[indexPath.row]
+        cell.textLabel?.text = comment.body
         return cell
     }
-    */
+
 
     /*
     // Override to support conditional editing of the table view.

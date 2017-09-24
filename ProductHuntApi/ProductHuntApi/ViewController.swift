@@ -63,9 +63,9 @@ extension ViewController: UITableViewDataSource {
 //            cell.textLabel?.text = eachPost.tagline
         }
         
-        if eachPost.imageURL == "image" {
+        if eachPost.imageURL == "Yoimage" {
             DispatchQueue.main.async {
-                cell.imageView?.image = UIImage(named: "phdefault.jpg")
+                cell.imageView?.image = UIImage(named: "CatImage")
             }
         }
         
@@ -80,7 +80,14 @@ extension ViewController: UITableViewDataSource {
     }
 }
 
-//extension ViewController: UITableViewDelegate {
-//
-//}
+extension ViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let posts = post[indexPath.row]
+        let postId = posts.id
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let commentsTableVC = storyboard.instantiateViewController(withIdentifier: "CommentsTableViewController") as! CommentsTableViewController
+        commentsTableVC.postId = postId
+        navigationController?.pushViewController(commentsTableVC, animated: true)
+    }
+}
 

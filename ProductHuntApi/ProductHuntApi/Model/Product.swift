@@ -49,7 +49,7 @@ extension Post: Decodable {
         let tagline = try container.decodeIfPresent(String.self, forKey: .tagline) ?? "The tagline is not here"
         let votesCount = try container.decodeIfPresent(Int.self, forKey: .votesCount) ?? 0
         let thumbnailContainer = try container.nestedContainer(keyedBy: ImageKey.self, forKey: .thumbnail)
-        let imageURL = try thumbnailContainer.decodeIfPresent(String.self, forKey: .imageURL) ?? "image"
+        let imageURL = try thumbnailContainer.decodeIfPresent(String.self, forKey: .imageURL) ?? "Yoimage"
         self.init(name: name, tagline: tagline, votes_count: votesCount, imageURL: imageURL, id: id)
     }
 }
