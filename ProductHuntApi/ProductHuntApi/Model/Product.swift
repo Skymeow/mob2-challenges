@@ -64,9 +64,11 @@ enum Result<T> {
     case failure(NetworkError)
 }
 
+
+
 class Networking {
     static func netWorking(completion: @escaping ([Post]) -> Void) {
-        let session = URLSession.shared
+//        let session = URLSession.shared
 //        let dg = DispatchGroup()
         var url = URL(string: "https://api.producthunt.com/v1/posts")
         let URLParams = [
@@ -83,7 +85,7 @@ class Networking {
         request.addValue("Bearer 15c9794295dbf9fb81bd616505b07f4dfebb5396e8391886f89604abf8170c21", forHTTPHeaderField: "Authorization")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
 //        start new task
-        session.dataTask(with: request) { (data, response, error) in
+        Singleton.sharedSession.dataTask(with: request) { (data, response, error) in
             if let data = data {
                 guard let producthunt = try? JSONDecoder().decode(ProductHunt.self, from: data) else {
                     return
@@ -96,11 +98,11 @@ class Networking {
 
 
 
-    
+
     protocol URLQueryParameterStringConvertible {
         var queryParameters: String {get}
     }
-    
+
 //        this property return a query parameters string from the given NSDictionary
     extension Dictionary: URLQueryParameterStringConvertible {
 //        this constructor makes whatever assigned to var happen only after the requirements
@@ -125,5 +127,5 @@ extension URL {
         }
 //    formatting the query parameters with an ascii table reference therefore we can return a json file
 }
- 
+
 

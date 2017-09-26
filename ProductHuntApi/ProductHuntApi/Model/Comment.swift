@@ -29,7 +29,7 @@ extension Comment: Decodable {
 
 class Network {
     static func networking(postId: Int, completion: @escaping ([Comment]) -> Void) {
-        let session = URLSession.shared
+//        let session = URLSession.shared
         var url = URL(string: "https://api.producthunt.com/v1/comments")
         let date = Date()
         let urlParams = ["search[post_id]": String(postId),
@@ -45,7 +45,7 @@ class Network {
         request.addValue("Bearer 15c9794295dbf9fb81bd616505b07f4dfebb5396e8391886f89604abf8170c21", forHTTPHeaderField: "Authorization")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        session.dataTask(with: request) {(data, response, error) in
+        Singleton.sharedSession.dataTask(with: request) {(data, response, error) in
             if let data = data {
                 guard let commentList = try? JSONDecoder().decode(Comments.self, from: data) else { return }
                 completion(commentList.comments)
