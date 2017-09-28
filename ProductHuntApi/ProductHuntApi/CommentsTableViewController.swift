@@ -22,13 +22,20 @@ class CommentsTableViewController: UITableViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         clickPost()
-        Network.networking(postId: postId) { (data) in
-            print(data)
-            self.comments = data
+        Networking.instance.fetch(route: .comment(postId: "\(postId)")){(data) in
+            let result = try? JSONDecoder().decode(Comments.self, from: data)
+            self.comments = (result?.comments)!
             DispatchQueue.main.async {
-                self.tableView.reloadData()
+              self.tableView.reloadData()
             }
         }
+//        Network.networking(postId: postId) { (data) in
+//            print(data)
+//            self.comments = data
+//            DispatchQueue.main.async {
+//                self.tableView.reloadData()
+//            }
+//        }
     }
 
     override func didReceiveMemoryWarning() {

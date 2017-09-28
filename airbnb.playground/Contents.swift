@@ -105,7 +105,7 @@ class Networking {
     
     let session = URLSession.shared
     let url = URL(string: "https://api.airbnb.com/v2/search_results?key=915pw2pnf4h1aiguhph5gc5b2")!
-    func getInfo(completion: @escaping(Result<[Listing]>) -> Void) {
+    func getInfo(completion: @escaping (Result<[Listing]>) -> Void) {
         let request = URLRequest(url: url)
         
         
@@ -120,7 +120,7 @@ class Networking {
                 completion(Result.success(info.searchResult))
             }
             }.resume()
-        
+//        completion(Result.failure(NetworkError.couldNotParseJSON))
     }
 }
 

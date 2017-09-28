@@ -17,7 +17,7 @@
 		F9D714781F7701F400126D74 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D714771F7701F400126D74 /* UIImageView+Extension.swift */; };
 		F9D714791F77187500126D74 /* phdefault.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F9D714751F77012C00126D74 /* phdefault.jpg */; };
 		F9D7147B1F77206D00126D74 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D7147A1F77206D00126D74 /* Comment.swift */; };
-		F9FC63BD1F7AD8240088733E /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FC63BC1F7AD8240088733E /* Network.swift */; };
+		F9FC63BD1F7AD8240088733E /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FC63BC1F7AD8240088733E /* Networking.swift */; };
 		F9FC63BF1F7ADB020088733E /* singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FC63BE1F7ADB020088733E /* singleton.swift */; };
 /* End PBXBuildFile section */
 
@@ -34,7 +34,7 @@
 		F9D714751F77012C00126D74 /* phdefault.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = phdefault.jpg; sourceTree = "<group>"; };
 		F9D714771F7701F400126D74 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		F9D7147A1F77206D00126D74 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
-		F9FC63BC1F7AD8240088733E /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Network.swift; path = ProductHuntApi/Network.swift; sourceTree = SOURCE_ROOT; };
+		F9FC63BC1F7AD8240088733E /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Networking.swift; path = ProductHuntApi/Networking.swift; sourceTree = SOURCE_ROOT; };
 		F9FC63BE1F7ADB020088733E /* singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = singleton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -70,7 +70,7 @@
 			children = (
 				F94BF9631F731F3A0067C94D /* Model */,
 				F94BF9511F731F120067C94D /* AppDelegate.swift */,
-				F9FC63BC1F7AD8240088733E /* Network.swift */,
+				F9FC63BC1F7AD8240088733E /* Networking.swift */,
 				F94BF9531F731F120067C94D /* ViewController.swift */,
 				F9D714731F76F8FD00126D74 /* CommentsTableViewController.swift */,
 				F94BF9551F731F120067C94D /* Main.storyboard */,
@@ -180,7 +180,7 @@
 				F94BF9521F731F120067C94D /* AppDelegate.swift in Sources */,
 				F94BF9651F731F610067C94D /* Product.swift in Sources */,
 				F9FC63BF1F7ADB020088733E /* singleton.swift in Sources */,
-				F9FC63BD1F7AD8240088733E /* Network.swift in Sources */,
+				F9FC63BD1F7AD8240088733E /* Networking.swift in Sources */,
 				F9D714741F76F8FD00126D74 /* CommentsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

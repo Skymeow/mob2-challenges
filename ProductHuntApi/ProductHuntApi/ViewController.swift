@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
   
     @IBOutlet weak var productsTableView: UITableView!
+    
     var post : [Post] = [] {
         didSet{
             DispatchQueue.main.async {
@@ -22,13 +23,21 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Networking.netWorking { (products) in
-            print(products)
-            self.post = products
+        Networking.instance.fetch(route: .post){ (products) in
+            
+            let Hunt = try? JSONDecoder().decode(ProductHunt.self, from: products)
+            self.post = (Hunt?.posts)!
             DispatchQueue.main.async {
                 self.productsTableView.reloadData()
             }
         }
+//        Networking.netWorking { (products) in
+//            print(products)
+//            self.post = products
+//            DispatchQueue.main.async {
+//                self.productsTableView.reloadData()
+//            }
+//        }
         // Do any additional setup after loading the view, typically from a nib.
     }
 
