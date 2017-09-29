@@ -74,7 +74,7 @@ class Networking {
 //            completion(decodableModel)
             
             completion(data)
-        }
+        }.resume()
         
         }
     }

@@ -26,7 +26,8 @@ class ViewController: UIViewController {
         Networking.instance.fetch(route: .post){ (products) in
             
             let Hunt = try? JSONDecoder().decode(ProductHunt.self, from: products)
-            self.post = (Hunt?.posts)!
+            guard let newPosts = Hunt?.posts else{return}
+            self.post = newPosts
             DispatchQueue.main.async {
                 self.productsTableView.reloadData()
             }
