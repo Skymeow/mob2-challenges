@@ -11,10 +11,10 @@
 		F91A44261F7B663C00989888 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F91A44241F7B663C00989888 /* Main.storyboard */; };
 		F91A44281F7B663C00989888 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F91A44271F7B663C00989888 /* Assets.xcassets */; };
 		F91A442B1F7B663C00989888 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F91A44291F7B663C00989888 /* LaunchScreen.storyboard */; };
-		F91A44331F7B66F300989888 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91A44321F7B66F300989888 /* Friend.swift */; };
-		F94763831F7D678300488BEB /* ListFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94763821F7D678300488BEB /* ListFriendsTableViewController.swift */; };
 		F94763861F7D67CA00488BEB /* DisplayMoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94763851F7D67CA00488BEB /* DisplayMoodViewController.swift */; };
 		F94763891F7D680100488BEB /* ListFriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94763881F7D680100488BEB /* ListFriendsTableViewCell.swift */; };
+		F98F11DC1F7EEBAD00EE0FD5 /* AddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98F11DB1F7EEBAD00EE0FD5 /* AddFriendViewController.swift */; };
+		F98F11DE1F7EEC0D00EE0FD5 /* ListFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98F11DD1F7EEC0D00EE0FD5 /* ListFriendsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,10 +24,10 @@
 		F91A44271F7B663C00989888 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F91A442A1F7B663C00989888 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F91A442C1F7B663C00989888 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F91A44321F7B66F300989888 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
-		F94763821F7D678300488BEB /* ListFriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFriendsTableViewController.swift; sourceTree = "<group>"; };
 		F94763851F7D67CA00488BEB /* DisplayMoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayMoodViewController.swift; sourceTree = "<group>"; };
 		F94763881F7D680100488BEB /* ListFriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFriendsTableViewCell.swift; sourceTree = "<group>"; };
+		F98F11DB1F7EEBAD00EE0FD5 /* AddFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendViewController.swift; sourceTree = "<group>"; };
+		F98F11DD1F7EEC0D00EE0FD5 /* ListFriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFriendsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,24 +67,16 @@
 				F91A44271F7B663C00989888 /* Assets.xcassets */,
 				F91A44291F7B663C00989888 /* LaunchScreen.storyboard */,
 				F91A442C1F7B663C00989888 /* Info.plist */,
-				F91A44341F7B66F800989888 /* Model */,
 			);
 			path = MoodTracker;
-			sourceTree = "<group>";
-		};
-		F91A44341F7B66F800989888 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				F91A44321F7B66F300989888 /* Friend.swift */,
-			);
-			name = Model;
 			sourceTree = "<group>";
 		};
 		F94763841F7D679F00488BEB /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				F94763821F7D678300488BEB /* ListFriendsTableViewController.swift */,
+				F98F11DD1F7EEC0D00EE0FD5 /* ListFriendsTableViewController.swift */,
 				F94763851F7D67CA00488BEB /* DisplayMoodViewController.swift */,
+				F98F11DB1F7EEBAD00EE0FD5 /* AddFriendViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -170,9 +162,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F91A44331F7B66F300989888 /* Friend.swift in Sources */,
-				F94763831F7D678300488BEB /* ListFriendsTableViewController.swift in Sources */,
+				F98F11DC1F7EEBAD00EE0FD5 /* AddFriendViewController.swift in Sources */,
 				F91A44211F7B663C00989888 /* AppDelegate.swift in Sources */,
+				F98F11DE1F7EEC0D00EE0FD5 /* ListFriendsTableViewController.swift in Sources */,
 				F94763891F7D680100488BEB /* ListFriendsTableViewCell.swift in Sources */,
 				F94763861F7D67CA00488BEB /* DisplayMoodViewController.swift in Sources */,
 			);

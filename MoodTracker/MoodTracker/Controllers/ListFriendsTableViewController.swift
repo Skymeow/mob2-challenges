@@ -7,16 +7,35 @@
 //
 
 import UIKit
+import CoreData
+class Friend {
+    var name = ""
+    var moodContext = ""
+}
 
-class ListFriendsTableViewController: UITableViewController {
+protocol PassValueFromDisplay: class {
+    func friendMoodSet(moodyFriend: Friend)
+}
+
+class ListFriendsTableViewController: UITableViewController, PassValueFromDisplay {
+    var friendInMood: Friend?
+    
     var friends = [Friend]() {
         didSet {
             tableView.reloadData()
         }
     }
+    
+    func friendMoodSet(moodyFriend: Friend) {
+        self.friendInMood = moodyFriend
+        
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        notes = CoreDataHelper.retrieveFriends()
+       
+//        friends = CoreDataHelper.retrieveFriends()
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,12 +45,12 @@ class ListFriendsTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 //    for delete
-//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
 //            CoreDataHelper.delete(friend: friends[indexPath.row])
 //            friends = CoreDataHelper.retrieveFriends()
-//        }
-//    }
+        }
+    }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return friends.count
     }
@@ -41,7 +60,12 @@ class ListFriendsTableViewController: UITableViewController {
         
         let row = indexPath.row
         let friend = friends[row]
-        cell.friendTablelabel.text = friend.title
+        
+//        cell.friendTablelabel.text = friendInMood?.name
+//        cell.cellMoodLabel.text = friendInMood?.moodContext
+        
+        cell.friendTablelabel.text = friend.name
+        cell.cellMoodLabel.text = friend.moodContext
         
         return cell
     }
@@ -53,7 +77,7 @@ class ListFriendsTableViewController: UITableViewController {
             let indexPath = tableView.indexPathForSelectedRow!
             let friend = friends[indexPath.row]
             let displayMoodViewController = segue.destination as! DisplayMoodViewController
-//            displayMoodViewController.friend = friend
+//            displayMoodViewController.friendModel = friend
         } else if identifier == "addFriend" {
             print("+ button tapped")
            }

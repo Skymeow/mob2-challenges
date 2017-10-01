@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="listfriendsTableViewCell" rowHeight="115" id="SU0-Vg-kAJ" customClass="ListFriendsTableViewCell">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="listfriendsTableViewCell" rowHeight="115" id="SU0-Vg-kAJ" customClass="ListFriendsTableViewCell" customModule="MoodTracker" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="115"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SU0-Vg-kAJ" id="HV0-Vq-UEJ">
@@ -40,15 +40,16 @@
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="PMd-Ia-qde" firstAttribute="leading" secondItem="HV0-Vq-UEJ" secondAttribute="leading" constant="5" id="KG3-e0-SaS"/>
+                                        <constraint firstItem="PMd-Ia-qde" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="HV0-Vq-UEJ" secondAttribute="leading" id="KG3-e0-SaS"/>
                                         <constraint firstAttribute="bottom" secondItem="PMd-Ia-qde" secondAttribute="bottom" constant="48.5" id="Pcc-Xq-X7P"/>
-                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="PMd-Ia-qde" secondAttribute="trailing" id="Pgl-2s-kfQ"/>
+                                        <constraint firstAttribute="trailing" secondItem="PMd-Ia-qde" secondAttribute="trailing" constant="328" id="Xnr-0z-kRS"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="KH5-MA-e1Y" secondAttribute="trailingMargin" id="Yj9-ui-x5c"/>
                                         <constraint firstItem="KH5-MA-e1Y" firstAttribute="leading" secondItem="HV0-Vq-UEJ" secondAttribute="leadingMargin" constant="20" id="pem-m2-Qo3"/>
                                         <constraint firstItem="PMd-Ia-qde" firstAttribute="top" secondItem="KH5-MA-e1Y" secondAttribute="bottom" constant="21" id="wBR-4S-Q4q"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="cellMoodLabel" destination="KH5-MA-e1Y" id="jKa-PL-tdD"/>
                                     <outlet property="friendTablelabel" destination="PMd-Ia-qde" id="oCl-6Y-CXs"/>
                                     <segue destination="8Gc-DB-3rQ" kind="show" identifier="displayMood" id="Wde-UP-Huc"/>
                                 </connections>
@@ -62,7 +63,7 @@
                     <navigationItem key="navigationItem" title="Friends" id="rG6-16-jMP">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Wut-gS-Jh5">
                             <connections>
-                                <segue destination="8Gc-DB-3rQ" kind="show" identifier="addFriend" id="IP2-ey-WsS"/>
+                                <segue destination="2jN-70-C4K" kind="show" identifier="toAddFriend" id="nUv-Gg-YkZ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -70,6 +71,51 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CpK-Hn-Lj7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-50.399999999999999" y="-12.143928035982009"/>
+        </scene>
+        <!--Friend-->
+        <scene sceneID="STl-Mh-LrT">
+            <objects>
+                <viewController id="2jN-70-C4K" customClass="AddFriendViewController" customModule="MoodTracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tyC-9a-lEG"/>
+                        <viewControllerLayoutGuide type="bottom" id="vBw-4H-Fsh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8xj-ib-KjF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I5d-hx-VjB">
+                                <rect key="frame" x="187" y="127" width="146" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Emc-LP-gpq">
+                                <rect key="frame" x="10" y="132" width="45" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="I5d-hx-VjB" firstAttribute="top" secondItem="tyC-9a-lEG" secondAttribute="bottom" constant="63" id="5r0-GS-yJv"/>
+                            <constraint firstAttribute="trailing" secondItem="I5d-hx-VjB" secondAttribute="trailing" constant="42" id="D8I-zH-JaX"/>
+                            <constraint firstItem="Emc-LP-gpq" firstAttribute="leading" secondItem="8xj-ib-KjF" secondAttribute="leading" constant="10" id="UkI-2f-ygl"/>
+                            <constraint firstItem="Emc-LP-gpq" firstAttribute="top" secondItem="tyC-9a-lEG" secondAttribute="bottom" constant="68" id="jZb-oN-Zj4"/>
+                            <constraint firstItem="I5d-hx-VjB" firstAttribute="leading" relation="lessThanOrEqual" secondItem="Emc-LP-gpq" secondAttribute="trailing" constant="132" id="vMK-UM-tJn"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Friend" id="1Ct-Yt-HUQ">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="cLB-oj-u7e"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="friendName" destination="I5d-hx-VjB" id="fbc-OO-qqF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sdQ-Jp-Ixw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-79.200000000000003" y="767.76611694152928"/>
         </scene>
         <!--Mood-->
         <scene sceneID="R0i-OE-Fqx">
@@ -83,20 +129,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="025-Y6-sTV">
-                                <rect key="frame" x="164" y="103" width="200" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="GVW-1R-Wig"/>
-                                    <constraint firstAttribute="height" constant="35" id="mmc-uh-N6J"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wAB-mq-Vw8">
                                 <rect key="frame" x="41" y="106" width="25" height="25"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="RTQ-VY-7wT"/>
                                     <constraint firstAttribute="height" constant="25" id="ftP-rY-kTi"/>
+                                    <constraint firstAttribute="width" constant="25" id="znD-Mv-Dze"/>
                                 </constraints>
                                 <state key="normal" image="friend"/>
                             </button>
@@ -106,19 +144,39 @@
                                     <constraint firstAttribute="width" constant="375" id="UAi-JS-L3y"/>
                                     <constraint firstAttribute="height" constant="162" id="hvU-xf-Szn"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="8Gc-DB-3rQ" id="0Hz-om-XbK"/>
+                                    <outlet property="delegate" destination="8Gc-DB-3rQ" id="gR6-5x-VGP"/>
+                                </connections>
                             </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mood" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TzC-gv-yJh">
+                                <rect key="frame" x="174" y="424" width="44" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="1KC-xx-QwE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.41568627450000001" blue="0.58431372550000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="c7f-dr-ZIc" firstAttribute="leading" secondItem="GDN-1P-8cl" secondAttribute="leading" id="1O1-gU-xTX"/>
                             <constraint firstItem="c7f-dr-ZIc" firstAttribute="top" secondItem="GDN-1P-8cl" secondAttribute="top" constant="210" id="7bl-wh-CjD"/>
-                            <constraint firstItem="025-Y6-sTV" firstAttribute="top" secondItem="GDN-1P-8cl" secondAttribute="top" constant="103" id="ZDP-XD-b4W"/>
+                            <constraint firstItem="wAB-mq-Vw8" firstAttribute="leading" secondItem="GDN-1P-8cl" secondAttribute="leading" constant="41" id="8oi-3c-E49"/>
+                            <constraint firstItem="wAB-mq-Vw8" firstAttribute="top" secondItem="GDN-1P-8cl" secondAttribute="top" constant="106" id="ATj-6o-tLG"/>
+                            <constraint firstItem="wAB-mq-Vw8" firstAttribute="leading" secondItem="GDN-1P-8cl" secondAttribute="leading" constant="41" id="Aho-Mc-C86"/>
+                            <constraint firstItem="wAB-mq-Vw8" firstAttribute="top" secondItem="GDN-1P-8cl" secondAttribute="top" constant="106" id="LsT-Ht-GRW"/>
+                            <constraint firstItem="c7f-dr-ZIc" firstAttribute="top" secondItem="wAB-mq-Vw8" secondAttribute="bottom" constant="79" id="M6L-Uf-Efk"/>
+                            <constraint firstItem="TzC-gv-yJh" firstAttribute="centerX" secondItem="GDN-1P-8cl" secondAttribute="centerX" constant="8.5" id="OwZ-2S-rjY"/>
                             <constraint firstItem="c7f-dr-ZIc" firstAttribute="centerX" secondItem="GDN-1P-8cl" secondAttribute="centerX" id="ZwU-5n-Oeg"/>
                             <constraint firstItem="mvQ-pH-6DS" firstAttribute="top" secondItem="c7f-dr-ZIc" secondAttribute="bottom" constant="295" id="fLJ-KP-bFu"/>
                             <constraint firstItem="wAB-mq-Vw8" firstAttribute="top" secondItem="GDN-1P-8cl" secondAttribute="top" constant="106" id="g0s-RF-6p7"/>
+                            <constraint firstItem="wAB-mq-Vw8" firstAttribute="top" secondItem="F7V-Cd-qmY" secondAttribute="bottom" constant="42" id="j8H-Bb-ExT"/>
+                            <constraint firstItem="TzC-gv-yJh" firstAttribute="top" secondItem="GDN-1P-8cl" secondAttribute="top" constant="424" id="kgB-j4-XCF"/>
                             <constraint firstAttribute="trailing" secondItem="c7f-dr-ZIc" secondAttribute="trailing" id="lcL-XD-PLW"/>
-                            <constraint firstItem="025-Y6-sTV" firstAttribute="trailing" secondItem="GDN-1P-8cl" secondAttribute="trailingMargin" constant="5" id="ps6-SK-4cS"/>
-                            <constraint firstItem="025-Y6-sTV" firstAttribute="leading" secondItem="wAB-mq-Vw8" secondAttribute="trailing" constant="98" id="s8g-rR-r8d"/>
+                            <constraint firstItem="wAB-mq-Vw8" firstAttribute="leading" secondItem="GDN-1P-8cl" secondAttribute="leadingMargin" constant="25" id="xH9-pO-oZf"/>
+                            <constraint firstAttribute="bottom" secondItem="TzC-gv-yJh" secondAttribute="bottom" constant="222" id="zF4-9e-1HC"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Mood" id="JxD-UF-CBj">
@@ -129,7 +187,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="friendContentTextView" destination="025-Y6-sTV" id="92R-sT-mhz"/>
+                        <outlet property="moodLabel" destination="TzC-gv-yJh" id="7wh-Hy-o8R"/>
                         <outlet property="pickerMood" destination="c7f-dr-ZIc" id="ZgY-40-7qE"/>
                     </connections>
                 </viewController>
@@ -160,7 +218,4 @@
     <resources>
         <image name="friend" width="25" height="25"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="IP2-ey-WsS"/>
-    </inferredMetricsTieBreakers>
 </document>

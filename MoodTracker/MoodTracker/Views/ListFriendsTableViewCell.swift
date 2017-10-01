@@ -11,6 +11,8 @@ import UIKit
 class ListFriendsTableViewCell: UITableViewCell {
     
     
+    
+    @IBOutlet weak var cellMoodLabel: UILabel!
     @IBOutlet weak var friendTablelabel: UILabel!
     
     override func awakeFromNib() {
