@@ -29,7 +29,6 @@ def get_courses():
    if user_num is None:
       err = create_error_json("no num url parameter")
       return(err, 404, None)
-
    object = collection.find_one({"number": user_num})
    # encode/seriolize result, but mongo _id is not json, it's an object, so it doesn't know how to decode
    # use result = object.dumps() or write your own encoder

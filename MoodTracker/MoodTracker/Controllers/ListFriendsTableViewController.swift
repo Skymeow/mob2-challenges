@@ -8,26 +8,31 @@
 
 import UIKit
 import CoreData
-class Friend {
-    var name = ""
-    var moodContext = ""
+
+struct Friend {
+    var name: String
+    var moodContext: String
 }
 
 protocol PassValueFromDisplay: class {
-    func friendMoodSet(moodyFriend: Friend)
+    func friendMoodSet(moodyFriend: Friend, row: Int)
 }
 
 class ListFriendsTableViewController: UITableViewController, PassValueFromDisplay {
     var friendInMood: Friend?
     
-    var friends = [Friend]() {
-        didSet {
-            tableView.reloadData()
-        }
-    }
     
-    func friendMoodSet(moodyFriend: Friend) {
-        self.friendInMood = moodyFriend
+    
+    var friends = [
+        Friend(name: "Peter", moodContext: "😁"),
+        Friend(name: "John", moodContext: "😁")
+    ]
+    
+    func friendMoodSet(moodyFriend: Friend, row: Int) {
+        self.friends[row].name = moodyFriend.name
+        self.friends[row].moodContext = moodyFriend.moodContext
+//        friends.append(moodyFriend)
+        tableView.reloadData()
         
     }
     
@@ -60,12 +65,11 @@ class ListFriendsTableViewController: UITableViewController, PassValueFromDispla
         
         let row = indexPath.row
         let friend = friends[row]
-        
-//        cell.friendTablelabel.text = friendInMood?.name
-//        cell.cellMoodLabel.text = friendInMood?.moodContext
-        
         cell.friendTablelabel.text = friend.name
+        if friend.moodContext != nil {
         cell.cellMoodLabel.text = friend.moodContext
+        }
+
         
         return cell
     }
@@ -77,14 +81,18 @@ class ListFriendsTableViewController: UITableViewController, PassValueFromDispla
             let indexPath = tableView.indexPathForSelectedRow!
             let friend = friends[indexPath.row]
             let displayMoodViewController = segue.destination as! DisplayMoodViewController
-//            displayMoodViewController.friendModel = friend
-        } else if identifier == "addFriend" {
+            displayMoodViewController.delegate = self
+            displayMoodViewController.row = indexPath.row
+            displayMoodViewController.friendInMood = friend
+        } else if identifier == "toAddFriend" {
             print("+ button tapped")
+            
            }
         }
     }
 //have to define the unwind storyBoardsegue in exit destination VC, so that you can link it in the storyBoard
     @IBAction func unwindToListFriendViewController(_ segue: UIStoryboardSegue) {
+        
 //        self.friends = CoreDataHelper.retrieveFriends()
     }
 

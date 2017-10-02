@@ -13,9 +13,19 @@ class AddFriendViewController: UIViewController {
     @IBOutlet weak var friendName: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "saveFriend" {
+            let friendModel = Friend(name: friendName.text ?? "", moodContext: "")
+//           friendModel.name = friendName.text ?? ""
+            let listFriendTableViewController = segue.destination as! ListFriendsTableViewController
+//            delegate?.friendMoodSet(moodyFriend: friendInMood!)
+            listFriendTableViewController.friends.append(friendModel)
+        }
+    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -23,14 +33,5 @@ class AddFriendViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

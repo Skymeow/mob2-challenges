@@ -107,13 +107,18 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Friend" id="1Ct-Yt-HUQ">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="cLB-oj-u7e"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="cLB-oj-u7e">
+                            <connections>
+                                <segue destination="AaG-n4-cdd" kind="unwind" identifier="saveFriend" unwindAction="unwindToListFriendViewController:" id="5w1-wp-pds"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="friendName" destination="I5d-hx-VjB" id="fbc-OO-qqF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sdQ-Jp-Ixw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="AaG-n4-cdd" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-79.200000000000003" y="767.76611694152928"/>
         </scene>
