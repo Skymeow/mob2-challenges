@@ -2,45 +2,59 @@ from flask import Flask, request
 import json
 import pdb
 from pymongo import MongoClient
+from bson import Binary, Code
+from bson.json_util import dumps
+# from utils.filename import
+from JSONEncoder import JSONEncoder
 app = Flask(__name__)
 
 mongo = MongoClient('localhost', 27017)
 app.db = mongo.local
 # mongo.db is creating a new collection called db
-# api = Api(app)
-# collection = app.db.courses
-
-@app.route('/course', methods=["GET"])
+# get courses collection
+collection = app.db.courses
+# get  parameters of the request
+user_course_dict = request.args
+# get back one course
+@app.route('/courses', methods=["GET"])
 def get_courses():
-   collection = app.db.courses
-   object = collection.find()
-   # data = json.dumps(object)
-   # pdb.set_trace()
-   # # print(data)
-   return(object)
+  # get course number and cast it into int
+   user_num = int(user_course_dict['number'])
+   if user_num is None:
+      err = create_error_json("no num url parameter")
+      return(err, 404, None)
 
+   object = collection.find_one({"number": user_num})
+   # encode/seriolize result, but mongo _id is not json, it's an object, so it doesn't know how to decode
+   # use result = object.dumps() or write your own encoder
+   result = JSONEncoder().encode(object)
+   pdb.set_trace()
+   print(result)
+   return(result, 200, None)
 
+#get back all courses
+@app.route('/courses', methods=["GET"])
+def get_all():
+  result = collection.find({})
+  all_coourses = []
+  for i in result:
+    all_coourses.append(NewJSONEncoder().encode(i))
+  return (all_coourses, 200, None)
 
-# def put_db():
-#      courses_json = {"name": "cs3", "number": "224"}
-#      data = collection.insert_one(course_json)
-#      return data
-
-# put_db()
-
-@app.route('/courses', methods=['GET','POST'])
+# post one course and return the object back
+@app.route('/courses', methods=['POST'])
 def post_courses():
+     course_dict = request.json
+     if not 'name' in course_dict or not 'number' in course_dict:
+      err = create_error_json('name or num not in json')
+      return(err, 404, None)
      collection = app.db.courses
-     courses_json = {"name": "cs3", "number": 224}
-     result = collection.insert_one(courses_json)
+     # courses_json = {"name": "cs3", "number": 224}
+     result = collection.insert_one(course_dict)
+     courses_json = JSONEncoder().endode(result)
+     return (courses_json, 201, None)
 
-     return (result, 201, None)
 
-@app.route('/coursespost', methods=["POST"])
-def post_again():
-    collection = app.db.courses
-    data = collection.insert_one({"name": "jeremy", "number": 20})
-    return (None, 201, None)
 # @app.route('/')
 # def hello_world():
 #     return 'Hello World!'
