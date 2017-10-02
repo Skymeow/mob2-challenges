@@ -13,6 +13,8 @@ app = Flask(__name__)
 mongo = MongoClient('localhost', 27017)
 app.db = mongo.local
 # mongo.db is creating a new collection called db
+def create_error_json(error)
+  return json.dumps("error": error)
 
 
 # get back one course
@@ -37,7 +39,7 @@ def get_courses():
    return(result, 200, None)
 
 #get back all courses
-@app.route('/all_courses', methods=["GET"])
+@app.route('/courses', methods=["GET"])
 def get_all():
   # get courses collection
   collection = app.db.courses
@@ -63,7 +65,13 @@ def post_courses():
      courses_json = JSONEncoder().endode(result)
      return (courses_json, 201, None)
 
-
+@app.route('/all_courses')
+def get_all_courses():
+    collection = app.db.courses
+    # find all courses, return a cursor object,(pagination):
+    result = courses_collection.find()
+    result_list = dumps(list(result))
+    return(result_list, 201, None)
 # @app.route('/')
 # def hello_world():
 #     return 'Hello World!'
