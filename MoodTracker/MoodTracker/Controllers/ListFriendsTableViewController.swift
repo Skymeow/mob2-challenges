@@ -20,18 +20,19 @@ protocol PassValueFromDisplay: class {
 
 class ListFriendsTableViewController: UITableViewController, PassValueFromDisplay {
     var friendInMood: Friend?
-    
-    
-    
-    var friends = [
-        Friend(name: "Peter", moodContext: "😁"),
-        Friend(name: "John", moodContext: "😁")
-    ]
+    var friends = [Friend](){
+      didSet {
+        tableView.reloadData()
+      }
+    }
+//    var friends = [
+//        Friend(name: "james", moodContext: "😁"),
+//        Friend(name: "John", moodContext: "😁")
+//    ]
     
     func friendMoodSet(moodyFriend: Friend, row: Int) {
         self.friends[row].name = moodyFriend.name
         self.friends[row].moodContext = moodyFriend.moodContext
-//        friends.append(moodyFriend)
         tableView.reloadData()
         
     }
@@ -69,8 +70,6 @@ class ListFriendsTableViewController: UITableViewController, PassValueFromDispla
         if friend.moodContext != nil {
         cell.cellMoodLabel.text = friend.moodContext
         }
-
-        
         return cell
     }
     

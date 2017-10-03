@@ -11,6 +11,7 @@ import UIKit
 class AddFriendViewController: UIViewController {
 
     @IBOutlet weak var friendName: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -18,11 +19,11 @@ class AddFriendViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "saveFriend" {
-            let friendModel = Friend(name: friendName.text ?? "", moodContext: "")
+            var friendModel = Friend(name: friendName.text ?? "", moodContext: "")
 //           friendModel.name = friendName.text ?? ""
-            let listFriendTableViewController = segue.destination as! ListFriendsTableViewController
-//            delegate?.friendMoodSet(moodyFriend: friendInMood!)
-            listFriendTableViewController.friends.append(friendModel)
+            let listFriendsTableViewController = segue.destination as! ListFriendsTableViewController
+
+            listFriendsTableViewController.friends.append(friendModel)
         }
     }
 
