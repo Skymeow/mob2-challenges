@@ -53,6 +53,8 @@ class ListFriendsTableViewController: UITableViewController, PassValueFromDispla
 //    for delete
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            let row = indexPath.row
+            self.friends.remove(at: row)
 //            CoreDataHelper.delete(friend: friends[indexPath.row])
 //            friends = CoreDataHelper.retrieveFriends()
         }

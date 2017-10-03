@@ -43,7 +43,7 @@ def get_all():
   # get courses collection
   collection = app.db.courses
   # get  parameters of the request
-  user_course_dict = request.args
+  # user_course_dict = request.args
   result = collection.find({})
   all_coourses = []
   for i in result:
@@ -61,7 +61,7 @@ def post_courses():
       err = create_error_json('name or num not in json')
       return(err, 404, None)
      result = collection.insert_one(course_dict)
-     courses_json = JSONEncoder().endode(result)
+     courses_json = JSONEncoder().encode(result)
      return (courses_json, 201, None)
 
 @app.route('/all_courses')
@@ -71,6 +71,18 @@ def get_all_courses():
     result = courses_collection.find()
     result_list = dumps(list(result))
     return(result_list, 201, None)
+
+
+@app.route('/courses', methods=['PATCH'])
+def update_courses():
+    collection = app.db.courses
+    course_dict = request.json
+    if not 'name' in course_dict or not 'number' in course_dict:
+      err = create_error_json('num or name not in json')
+      return(err, 404, None)
+    result = collection.find_one_and_update(course_dict)
+    json_ = JSONEncoder().encode(result)
+    return(json_, 200, None)
 # @app.route('/')
 # def hello_world():
 #     return 'Hello World!'
