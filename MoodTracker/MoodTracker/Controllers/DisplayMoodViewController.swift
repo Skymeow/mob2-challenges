@@ -7,7 +7,12 @@
 //
 
 import UIKit
-
+import Foundation
+enum Mood: String {
+    case sad = "😖"
+    case medium = "🙃"
+    case happy = "😁"
+}
 
 class DisplayMoodViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     var friendInMood: Friend?

@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreData
-
+//or make a mood enum with different cases
 struct Friend {
     var name: String
     var moodContext: String
@@ -55,8 +55,7 @@ class ListFriendsTableViewController: UITableViewController, PassValueFromDispla
         if editingStyle == .delete {
             let row = indexPath.row
             self.friends.remove(at: row)
-//            CoreDataHelper.delete(friend: friends[indexPath.row])
-//            friends = CoreDataHelper.retrieveFriends()
+
         }
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -18,7 +18,7 @@ app.db = mongo.local
 
 
 # get back one course
-@app.route('/courses', methods=["GET"])
+@app.route('/course', methods=["GET"])
 def get_courses():
   # get courses collection
   collection = app.db.courses
@@ -33,7 +33,6 @@ def get_courses():
    # encode/seriolize result, but mongo _id is not json, it's an object, so it doesn't know how to decode
    # use result = object.dumps() or write your own encoder
   result = JSONEncoder().encode(object)
-  pdb.set_trace()
   print(result)
   return(result, 200, None)
 
@@ -45,10 +44,10 @@ def get_all():
   # get  parameters of the request
   # user_course_dict = request.args
   result = collection.find({})
-  all_coourses = []
+  all_courses = []
   for i in result:
-    all_coourses.append(JSONEncoder().encode(i))
-  return (all_coourses, 200, None)
+    all_courses.append(JSONEncoder().encode(i))
+  return (all_courses, 200, None)
 
 # post one course and return the object back
 @app.route('/courses', methods=['POST'])
@@ -57,7 +56,7 @@ def post_courses():
     collection = app.db.courses
     # get the request of json body
     course_dict = request.json
-    if not 'name' in course_dict or not 'number' in course_dict:
+    if not "name" in course_dict:
       err = create_error_json('name or num not in json')
       return(err, 404, None)
     result = collection.insert_one(course_dict)
@@ -68,7 +67,7 @@ def post_courses():
 def get_all_courses():
     collection = app.db.courses
     # find all courses, return a cursor object,(pagination):
-    result = courses_collection.find()
+    result = collection.find()
     result_list = dumps(list(result))
     return(result_list, 201, None)
 
@@ -76,11 +75,12 @@ def get_all_courses():
 @app.route('/courses', methods=['PATCH'])
 def update_courses():
     collection = app.db.courses
-    course_dict = request.json
-    if not 'name' in course_dict or not 'number' in course_dict:
-      err = create_error_json('num or name not in json')
-      return(err, 404, None)
-    result = collection.find_one_and_update(course_dict)
+    # course_dict = request.json
+    # if not "name" in course_dict:
+    #   err = create_error_json('num or name not in json')
+    #   return(err, 404, None)
+    fetch_result = collection.get_courses()
+    result = fetch_result.update_one({'name': "updatedclass"})
     json_ = JSONEncoder().encode(result)
     return(json_, 200, None)
 # @app.route('/')
