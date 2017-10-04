@@ -13,8 +13,8 @@ app = Flask(__name__)
 mongo = MongoClient('localhost', 27017)
 app.db = mongo.local
 # mongo.db is creating a new collection called db
-def create_error_json(error)
-  return json.dumps("error": error)
+# def create_error_json(error)
+#   return json.dumps("error": error)
 
 
 # get back one course
@@ -26,16 +26,16 @@ def get_courses():
   user_course_dict = request.args
   # get course number and cast it into int
   user_num = int(user_course_dict['number'])
-   if user_num is None:
-      err = create_error_json("no num url parameter")
-      return(err, 404, None)
-   object = collection.find_one({"number": user_num})
+  if user_num is None:
+    err = create_error_json("no num url parameter")
+    return(err, 404, None)
+  object = collection.find_one({"number": user_num})
    # encode/seriolize result, but mongo _id is not json, it's an object, so it doesn't know how to decode
    # use result = object.dumps() or write your own encoder
-   result = JSONEncoder().encode(object)
-   pdb.set_trace()
-   print(result)
-   return(result, 200, None)
+  result = JSONEncoder().encode(object)
+  pdb.set_trace()
+  print(result)
+  return(result, 200, None)
 
 #get back all courses
 @app.route('/courses', methods=["GET"])
@@ -60,9 +60,9 @@ def post_courses():
     if not 'name' in course_dict or not 'number' in course_dict:
       err = create_error_json('name or num not in json')
       return(err, 404, None)
-     result = collection.insert_one(course_dict)
-     courses_json = JSONEncoder().encode(result)
-     return (courses_json, 201, None)
+    result = collection.insert_one(course_dict)
+    courses_json = JSONEncoder().encode(result)
+    return (courses_json, 201, None)
 
 @app.route('/all_courses')
 def get_all_courses():
