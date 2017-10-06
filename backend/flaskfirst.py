@@ -71,18 +71,25 @@ def get_all_courses():
     result_list = dumps(list(result))
     return(result_list, 201, None)
 
-
-@app.route('/courses', methods=['PATCH'])
+# change update_many into update_one if want to update one item
+@app.route('/updateCourses', methods=['PATCH'])
 def update_courses():
     collection = app.db.courses
-    # course_dict = request.json
-    # if not "name" in course_dict:
-    #   err = create_error_json('num or name not in json')
-    #   return(err, 404, None)
-    fetch_result = collection.get_courses()
-    result = fetch_result.update_one({'name': "updatedclass"})
-    json_ = JSONEncoder().encode(result)
-    return(json_, 200, None)
+    result = collection.update_many(
+      {"name": "cs4"},
+      {"$set": {"name": "skySuperclassweeeeee"}}
+    )
+    return print(result)
+
+@app.route('/insertUpdateCourses', methods=['PATCH'])
+def insert_courses():
+    collection = app.db.courses
+    result = collection.update_one(
+      {"name": "cs1"},
+      { "$addToSet": {"items":{"book":"mathbook", "quantity": "33"}}
+
+      }, false, true
+    )
 # @app.route('/')
 # def hello_world():
 #     return 'Hello World!'
