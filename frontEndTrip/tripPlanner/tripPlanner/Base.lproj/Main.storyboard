@@ -16,12 +16,27 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jAx-Dc-gIe">
+                                <rect key="frame" x="190" y="426" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="signupTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OQc-y6-kJW"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="jAx-Dc-gIe" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="190" id="REB-1M-kgm"/>
+                            <constraint firstAttribute="bottom" secondItem="jAx-Dc-gIe" secondAttribute="bottom" constant="211" id="eKc-KD-19k"/>
+                            <constraint firstAttribute="trailing" secondItem="jAx-Dc-gIe" secondAttribute="trailing" constant="139" id="sh4-Kx-KsT"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="48.799999999999997" y="52.623688155922046"/>
         </scene>
     </scenes>
 </document>
