@@ -71,7 +71,8 @@ class Networking {
     func fetch(route: Route, method: String, headers: [String: String], data: Encodable?, completion: @escaping (Data, Int) -> Void) {
         
         let urlString = baseURL.appending(route.path())
-        let toUrl = URL(string: urlString)!
+        var toUrl = URL(string: urlString)!
+        toUrl = toUrl.appendingQueryParameters(_parametersDictionary: route.urlParameters())
         var request = URLRequest(url: toUrl)
       
         request.allHTTPHeaderFields = headers
@@ -85,5 +86,31 @@ class Networking {
         }.resume()
         
         
+    }
+}
+
+protocol URLQueryParameterStringConvertible {
+    var queryParameters: String {get}
+}
+//        this property return a query parameters string from the given NSDictionary
+extension Dictionary: URLQueryParameterStringConvertible {
+    //        this constructor makes whatever assigned to var happen only after the requirements
+    var queryParameters: String {
+        var parts: [String] = []
+        for (key, value) in self {
+            let part = String(format: "%@=%@",
+                              String(describing: key).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!,
+                              String(describing: value).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+            )
+            parts.append(part as String)
+        }
+        return parts.joined(separator: "&")
+    }
+}
+//append string parameter to url
+extension URL {
+    func appendingQueryParameters(_parametersDictionary: Dictionary<String, String>) -> URL {
+        let URLString: String = String(format: "%@?%@", self.absoluteString, _parametersDictionary.queryParameters)
+        return URL(string: URLString)!
     }
 }

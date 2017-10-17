@@ -261,6 +261,7 @@
                     </view>
                     <connections>
                         <outlet property="destination" destination="vJs-fR-4cS" id="zzh-TL-yAQ"/>
+                        <outlet property="postButton" destination="y0N-Fv-WNG" id="dvP-f7-cvD"/>
                         <outlet property="startTime" destination="MDL-V4-w6h" id="0v1-yb-q4y"/>
                         <outlet property="tripName" destination="DoW-ku-9I3" id="RQ2-pt-l2l"/>
                         <outlet property="waypoint1" destination="OKU-aX-WUT" id="jhQ-IX-mcp"/>
@@ -271,7 +272,35 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V5X-oX-BNs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="943" y="134"/>
+            <point key="canvasLocation" x="941.60000000000002" y="133.5832083958021"/>
+        </scene>
+        <!--Display Trips Table View Controller-->
+        <scene sceneID="t3z-wr-d70">
+            <objects>
+                <tableViewController storyboardIdentifier="toDisplayTrips" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dpD-K4-UPN" customClass="DisplayTripsTableViewController" customModule="tripPlanner" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="cPu-ra-q4C">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Svw-Gq-qIc">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Svw-Gq-qIc" id="B1A-pu-xPr">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="dpD-K4-UPN" id="olY-VP-DaU"/>
+                            <outlet property="delegate" destination="dpD-K4-UPN" id="mUt-Ml-WGE"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Kw-Ct-qPu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2295" y="227"/>
         </scene>
     </scenes>
 </document>

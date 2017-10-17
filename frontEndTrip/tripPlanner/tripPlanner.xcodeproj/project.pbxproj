@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F919F2F31F969F1400300F7D /* DisplayTripsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F919F2F21F969F1400300F7D /* DisplayTripsTableViewController.swift */; };
 		F92049051F95A5BB00A409F5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92049041F95A5BB00A409F5 /* LoginViewController.swift */; };
 		F92049071F95A5DC00A409F5 /* TripsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92049061F95A5DC00A409F5 /* TripsViewController.swift */; };
 		F9A8241B1F948A83000C39BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A8241A1F948A83000C39BE /* AppDelegate.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F919F2F21F969F1400300F7D /* DisplayTripsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayTripsTableViewController.swift; sourceTree = "<group>"; };
 		F92049041F95A5BB00A409F5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		F92049061F95A5DC00A409F5 /* TripsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsViewController.swift; sourceTree = "<group>"; };
 		F9A824171F948A83000C39BE /* tripPlanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tripPlanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,6 +77,7 @@
 				F9A824261F948A83000C39BE /* Info.plist */,
 				F92049041F95A5BB00A409F5 /* LoginViewController.swift */,
 				F92049061F95A5DC00A409F5 /* TripsViewController.swift */,
+				F919F2F21F969F1400300F7D /* DisplayTripsTableViewController.swift */,
 			);
 			path = tripPlanner;
 			sourceTree = "<group>";
@@ -158,6 +161,7 @@
 				F9A8241D1F948A83000C39BE /* SignupViewController.swift in Sources */,
 				F9A8241B1F948A83000C39BE /* AppDelegate.swift in Sources */,
 				F9A8242D1F9524A7000C39BE /* User.swift in Sources */,
+				F919F2F31F969F1400300F7D /* DisplayTripsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

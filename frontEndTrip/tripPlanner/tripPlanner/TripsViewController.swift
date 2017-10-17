@@ -11,6 +11,8 @@ import UIKit
 class TripsViewController: UIViewController {
     var user_email: String = ""
     var user_password: String = ""
+    
+    @IBOutlet weak var postButton: UIButton!
     @IBOutlet weak var tripName: UITextField!
     
     @IBOutlet weak var startTime: UITextField!
@@ -42,6 +44,18 @@ class TripsViewController: UIViewController {
         
         Networking.instance.fetch(route: .trips(user_email: self.user_email), method: "POST", headers: ["Authorization": BasicAuth.generateBasicAuthHeader(username: self.user_email, password: self.user_password),"Content-Type": "application/json"], data: data as! Encodable) { (data, response)  in
             print(response)
+            if response == 201 {
+                print("successed post")
+                DispatchQueue.main.async {
+                    let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                    let displayTripsTableViewController = storyBoard.instantiateViewController(withIdentifier: "toDisplayTrips") as! DisplayTripsTableViewController
+                    displayTripsTableViewController.user_email = self.user_email
+                    displayTripsTableViewController.user_password = self.user_password
+                    self.present(displayTripsTableViewController, animated: true, completion: nil)
+                }
+            } else {
+                self.addTripTapped(self.postButton)
+            }
             
         }
     }
