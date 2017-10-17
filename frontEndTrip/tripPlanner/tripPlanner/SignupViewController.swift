@@ -63,13 +63,9 @@ class SignupViewController: UIViewController {
         self.username = self.nameInput.text
         self.email = self.emailInput.text
         self.password = self.passwordInput.text
-        let jsonDict = ["email": self.email,
-                        "username": self.username,
-                        "password": self.password
-                       ]
-//        let user = User(username: self.username, email: self.email, password: self.password)
-        Networking.instance.fetch(route: Route.users, method: "POST", headers: ["Content-Type": "application/json"], data: jsonDict) { (data) in
-            print(data)
+       let user = User(username: self.username, email: self.email, password: self.password)
+        Networking.instance.fetch(route: Route.users, method: "POST", headers: ["Content-Type": "application/json"], data: user) { (data, response) in
+            print(data, response)
             
         }
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)

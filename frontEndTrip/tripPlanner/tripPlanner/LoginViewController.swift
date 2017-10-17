@@ -1,5 +1,5 @@
 //
-//  TripsViewController.swift
+//  LoginViewController.swift
 //  tripPlanner
 //
 //  Created by Sky Xu on 10/16/17.
@@ -9,8 +9,17 @@
 import Foundation
 import UIKit
 
-class LoginViewController: UIViewController {
+struct Alerts {
+    func loginError( controller: LoginViewController) {
+        let logInAlert = UIAlertController(title: "Login error", message: "plz try again", preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "try again", style: .default, handler: nil)
+        logInAlert.addAction(cancel)
+        controller.present(logInAlert, animated: true, completion: nil)
+    }
+}
 
+class LoginViewController: UIViewController {
+    let alert = Alerts()
     var email: String!
     var password: String!
     let width = 0.25 * UIScreen.main.bounds.size.width
@@ -49,7 +58,24 @@ class LoginViewController: UIViewController {
         print("login tapped")
         self.email = self.emailInput.text
         self.password = self.passwordInput.text
-       
+        let decoder = JSONDecoder()
+        Networking.instance.fetch(route: Route.users, method: "GET", headers: ["Authorization": BasicAuth.generateBasicAuthHeader(username: self.email, password: self.password),"Content-Type": "application/json"], data: nil) { (data, response) in
+            print(data,response)
+//            guard let userInfo = try? decoder.decode(User.self, from: data) else {return}
+//            print(userInfo)
+            if response == 200 {
+                print("successed login")
+                DispatchQueue.main.async {
+                    let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                    let tripsViewController = storyBoard.instantiateViewController(withIdentifier: "toTrips") as! TripsViewController
+                    self.present(tripsViewController, animated: true, completion: nil)
+                }
+            } else {
+                 DispatchQueue.main.async {
+                   self.alert.loginError(controller: self)
+                }
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -59,4 +85,5 @@ class LoginViewController: UIViewController {
     
     
 }
+
 

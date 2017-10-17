@@ -39,7 +39,7 @@ enum Route {
         switch self {
         case .users:
             let encoder = JSONEncoder()
-            guard let user = data as? [String: String] else {return nil}
+            guard let user = data as? User else {return nil}
             let result = try? encoder.encode(user)
             return result
         default:
@@ -63,7 +63,7 @@ class Networking {
     var baseURL = "http://127.0.0.1:5000/"
     let session = URLSession.shared
     
-    func fetch(route: Route, method: String, headers: [String: String], data: Encodable?, completion: @escaping (Data) -> Void) {
+    func fetch(route: Route, method: String, headers: [String: String], data: Encodable?, completion: @escaping (Data, Int) -> Void) {
         
         let urlString = baseURL.appending(route.path())
         let toUrl = URL(string: urlString)!
@@ -73,9 +73,10 @@ class Networking {
         request.httpMethod = method
         request.httpBody = route.body(data: data)
         session.dataTask(with: request) { (data, response, error) in
+            let statusCode: Int = (response as! HTTPURLResponse).statusCode
             guard let data = data else { return }
+            completion(data, statusCode)
             
-            completion(data)
         }.resume()
         
         
