@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tripPlanner/Networking.swift"
-            timestampString = "529890391.030168"
+            timestampString = "529900055.028146"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "post(username:email:password:completion:)"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "fetch(route:method:headers:data:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,12 +26,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "tripPlanner/Networking.swift"
-            timestampString = "529890391.030723"
+            timestampString = "529900055.028271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
-            landmarkName = "post(username:email:password:completion:)"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "fetch(route:method:headers:data:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "tripPlanner/SignupViewController.swift"
+            timestampString = "529900055.028345"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "signupTapped(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

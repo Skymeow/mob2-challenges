@@ -7,6 +7,46 @@
 //
 
 import Foundation
+
+enum Route {
+    case users
+    case trips(user_email: String)
+    
+    func path()->String {
+        switch self {
+        case .users:
+            return "users"
+        case .trips:
+            return "trips"
+        }
+    }
+    
+//    func headers(username: String, password: String)->[String: String] {
+//        return ["Authorization": BasicAuth.generateBasicAuthHeader(username: username, password: password),
+//        "Content-Type": "application/json"]
+//    }
+    
+    func urlParameters()->[String: String] {
+        switch self {
+        case .users:
+            return [:]
+        case let .trips(user_email):
+            return ["user_email": user_email]
+        }
+    }
+    
+    func body(data: Encodable)->Data? {
+        switch self {
+        case .users:
+            let encoder = JSONEncoder()
+            guard let user = data as? [String: String] else {return nil}
+            let result = try? encoder.encode(user)
+            return result
+        default:
+            return nil
+        }
+    }
+}
 struct BasicAuth {
     static func generateBasicAuthHeader(username: String, password: String) -> String {
         let loginString = String(format: "%@:%@", username, password)
@@ -20,31 +60,22 @@ struct BasicAuth {
 //typealias JSON = [String: Any]
 class Networking {
     static let instance = Networking()
-    var baseURL = "http://127.0.0.1:5000/users"
+    var baseURL = "http://127.0.0.1:5000/"
     let session = URLSession.shared
     
-    func post(username:String, email:String, password:String, completion: @escaping (User?) -> Void) {
-        let url = URL(string: self.baseURL)
-        var request = URLRequest(url: url!)
-        let jsonDict = ["email": email,
-                              "username": username,
-                              "password": password
-        ]
+    func fetch(route: Route, method: String, headers: [String: String], data: Encodable?, completion: @escaping (Data) -> Void) {
         
-        let encoder = JSONEncoder()
-        let jsonData = try? encoder.encode(jsonDict)
-        
-        request.httpMethod = "POST"
-        request.httpBody = jsonData
-        request.allHTTPHeaderFields = ["Content-Type": "application/json"]
-    
-//        request.setValue(BasicAuth.generateBasicAuthHeader(username: email, password: password), forHTTPHeaderField: "Authorization")
+        let urlString = baseURL.appending(route.path())
+        let toUrl = URL(string: urlString)!
+        var request = URLRequest(url: toUrl)
+      
+        request.allHTTPHeaderFields = headers
+        request.httpMethod = method
+        request.httpBody = route.body(data: data)
         session.dataTask(with: request) { (data, response, error) in
-            if let data = data {
-                guard let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) else {return}
-                print(json)
-                completion(nil)
-            }
+            guard let data = data else { return }
+            
+            completion(data)
         }.resume()
         
         

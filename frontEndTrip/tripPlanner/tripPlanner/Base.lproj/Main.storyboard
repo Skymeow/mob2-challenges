@@ -38,5 +38,49 @@
             </objects>
             <point key="canvasLocation" x="48.799999999999997" y="52.623688155922046"/>
         </scene>
+        <!--Login View Controller-->
+        <scene sceneID="6oB-Dk-xLq">
+            <objects>
+                <viewController storyboardIdentifier="toLogin" useStoryboardIdentifierAsRestorationIdentifier="YES" id="kwh-z1-n3S" customClass="LoginViewController" customModule="tripPlanner" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PkQ-z6-56u">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vk6-wD-cre">
+                                <rect key="frame" x="148" y="512" width="78" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="loginTapped:" destination="kwh-z1-n3S" eventType="touchUpInside" id="7fJ-Dd-3TR"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="vk6-wD-cre" firstAttribute="leading" secondItem="bRG-Yf-sGL" secondAttribute="leading" constant="148" id="VQz-Fm-CQI"/>
+                            <constraint firstItem="bRG-Yf-sGL" firstAttribute="bottom" secondItem="vk6-wD-cre" secondAttribute="bottom" constant="125" id="nrr-pQ-lbP"/>
+                            <constraint firstItem="bRG-Yf-sGL" firstAttribute="trailing" secondItem="vk6-wD-cre" secondAttribute="trailing" constant="149" id="sbu-T7-Sfn"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="bRG-Yf-sGL"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Edu-o6-zD4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="250" y="762"/>
+        </scene>
+        <!--Trips View Controller-->
+        <scene sceneID="ms1-6g-cxC">
+            <objects>
+                <viewController storyboardIdentifier="toTrips" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fQs-7o-35E" customClass="TripsViewController" customModule="tripPlanner" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4Mp-Uq-GD9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="0.87843137250000003" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <viewLayoutGuide key="safeArea" id="InN-vv-zFC"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V5X-oX-BNs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="943" y="134"/>
+        </scene>
     </scenes>
 </document>

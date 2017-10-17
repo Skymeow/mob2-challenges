@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F92049011F9583DA00A409F5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92049001F9583DA00A409F5 /* LoginViewController.swift */; };
+		F92049031F95855400A409F5 /* TripsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92049021F95855400A409F5 /* TripsViewController.swift */; };
 		F9A8241B1F948A83000C39BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A8241A1F948A83000C39BE /* AppDelegate.swift */; };
 		F9A8241D1F948A83000C39BE /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A8241C1F948A83000C39BE /* SignupViewController.swift */; };
 		F9A824201F948A83000C39BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9A8241E1F948A83000C39BE /* Main.storyboard */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F92049001F9583DA00A409F5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		F92049021F95855400A409F5 /* TripsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsViewController.swift; sourceTree = "<group>"; };
 		F9A824171F948A83000C39BE /* tripPlanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tripPlanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9A8241A1F948A83000C39BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F9A8241C1F948A83000C39BE /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
@@ -66,6 +70,8 @@
 				F9A824301F95256C000C39BE /* Networking.swift */,
 				F9A8242E1F9524B8000C39BE /* Trip.swift */,
 				F9A8241E1F948A83000C39BE /* Main.storyboard */,
+				F92049001F9583DA00A409F5 /* LoginViewController.swift */,
+				F92049021F95855400A409F5 /* TripsViewController.swift */,
 				F9A824211F948A83000C39BE /* Assets.xcassets */,
 				F9A824231F948A83000C39BE /* LaunchScreen.storyboard */,
 				F9A824261F948A83000C39BE /* Info.plist */,
@@ -145,9 +151,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F92049031F95855400A409F5 /* TripsViewController.swift in Sources */,
 				F9A8242F1F9524B8000C39BE /* Trip.swift in Sources */,
 				F9A824311F95256C000C39BE /* Networking.swift in Sources */,
 				F9A8241D1F948A83000C39BE /* SignupViewController.swift in Sources */,
+				F92049011F9583DA00A409F5 /* LoginViewController.swift in Sources */,
 				F9A8241B1F948A83000C39BE /* AppDelegate.swift in Sources */,
 				F9A8242D1F9524A7000C39BE /* User.swift in Sources */,
 			);

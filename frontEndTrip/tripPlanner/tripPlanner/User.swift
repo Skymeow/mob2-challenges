@@ -9,7 +9,7 @@
 import Foundation
 
 
-struct User: Decodable {
+struct User: Decodable, Encodable {
     let username: String
     let email: String
     let password: String
