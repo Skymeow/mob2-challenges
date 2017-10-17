@@ -9,27 +9,50 @@
 import UIKit
 
 class TripsViewController: UIViewController {
-
+    var user_email: String = ""
+    var user_password: String = ""
+    @IBOutlet weak var tripName: UITextField!
+    
+    @IBOutlet weak var startTime: UITextField!
+    
+    @IBOutlet weak var destination: UITextField!
+    
+    @IBOutlet weak var waypoint1: UITextField!
+    
+    @IBOutlet weak var waypoint2: UITextField!
+    
+    @IBOutlet weak var waypoint3: UITextField!
+    
+    @IBOutlet weak var waypoint4: UITextField!
+    
+    
+    @IBAction func addTripTapped(_ sender: Any) {
+        
+        var waypointsArr = [Waypoint]()
+        let point1 = Waypoint(destination: waypoint1!.text!)
+        let point2 = Waypoint(destination: waypoint2!.text!)
+        let point3 = Waypoint(destination: waypoint3!.text!)
+        let point4 = Waypoint(destination: waypoint4!.text!)
+        waypointsArr.append(point1)
+        waypointsArr.append(point2)
+        waypointsArr.append(point3)
+        waypointsArr.append(point4)
+        
+        let data = Trip(user_email: self.user_email, completed: false, destination: destination!.text!, trip_name: tripName!.text!, start_time: startTime!.text!, waypoints: waypointsArr)
+        
+        Networking.instance.fetch(route: .trips(user_email: self.user_email), method: "POST", headers: ["Authorization": BasicAuth.generateBasicAuthHeader(username: self.user_email, password: self.user_password),"Content-Type": "application/json"], data: data as! Encodable) { (data, response)  in
+            print(response)
+            
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

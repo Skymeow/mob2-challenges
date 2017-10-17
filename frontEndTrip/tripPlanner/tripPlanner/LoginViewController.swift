@@ -19,6 +19,8 @@ struct Alerts {
 }
 
 class LoginViewController: UIViewController {
+//    var user_email: String = ""
+    
     let alert = Alerts()
     var email: String!
     var password: String!
@@ -58,16 +60,19 @@ class LoginViewController: UIViewController {
         print("login tapped")
         self.email = self.emailInput.text
         self.password = self.passwordInput.text
-        let decoder = JSONDecoder()
         Networking.instance.fetch(route: Route.users, method: "GET", headers: ["Authorization": BasicAuth.generateBasicAuthHeader(username: self.email, password: self.password),"Content-Type": "application/json"], data: nil) { (data, response) in
             print(data,response)
-//            guard let userInfo = try? decoder.decode(User.self, from: data) else {return}
+//            guard let userInfo = try? JSONDecoder().decode(User.self, from: data) else {return}
 //            print(userInfo)
+//            self.user_email = userInfo.email
+
             if response == 200 {
                 print("successed login")
                 DispatchQueue.main.async {
                     let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
                     let tripsViewController = storyBoard.instantiateViewController(withIdentifier: "toTrips") as! TripsViewController
+                    tripsViewController.user_email = self.email
+                    tripsViewController.user_password = self.password
                     self.present(tripsViewController, animated: true, completion: nil)
                 }
             } else {

@@ -9,18 +9,14 @@
 import Foundation
 import UIKit
 
-struct Waypoint: Decodable {
+struct Waypoint: Decodable, Encodable {
     let destination: String?
-    let lat: String?
-    let long: String?
     
-    init(destination: String?, lat: String?, long: String?) {
+    init(destination: String?) {
         self.destination = destination
-        self.lat = lat
-        self.long = long
     }
 }
-struct Trip: Decodable {
+struct Trip: Decodable, Encodable {
     let user_email: String?
     let completed: Bool?
     let destination: String?

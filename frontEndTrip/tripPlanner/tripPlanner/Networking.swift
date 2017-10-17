@@ -42,6 +42,11 @@ enum Route {
             guard let user = data as? User else {return nil}
             let result = try? encoder.encode(user)
             return result
+        case .trips:
+            let encoder = JSONEncoder()
+            guard let trip = data as? Trip else {return nil}
+            let result = try? encoder.encode(trip)
+            return result
         default:
             return nil
         }
