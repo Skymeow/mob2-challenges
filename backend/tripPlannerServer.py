@@ -28,19 +28,24 @@ def auth_validation(email, user_password):
     if user is None:
         return({"error": "email not found"}, 404, None)
     db_password = user['password']
+    user_id = user["_id"]
     if bcrypt.hashpw(encodedPassword, db_password) == db_password:
-        return True
-    return False
+        return (user_id, 200, None)
+    return (None, 400, None)
 
 def auth_function(f):
     def wrapper(*args, **kwargs):
         auth = request.authorization
-
-        if not auth_validation(auth.username, auth.password):
+        validation = auth_validation(auth.username, auth.password)
+        if validation[1] is 400:
             return ('Could not verify your access level for that URL.\n'
-                    'You have to login with proper credentials', 401,
+                    'You have to login with proper credentials', 400,
                     {'WWW-Authenticate': 'Basic realm="Login Required"'})
-        return f(*args, **kwargs)
+        else:
+            # args is the argument we pass in the function,
+            # validation[0] is the return value,
+            # kwargs is whatever the rest we get back
+            return f(*args, validation[0], **kwargs)
     return wrapper
 
 ## Write Resources here
@@ -136,49 +141,30 @@ class User(Resource):
 class Trip(Resource):
 
     @auth_function
-    def post(self):
-
-        # pdb.set_trace()
+    def post(self, user_id):
         trip_collection = app.db.trips
-        email = request.authorization.username
-
-        user_collection = app.db.user
-        user = user_collection.find_one({"email": email})
-
+        # email = request.authorization.username
         new_trip = request.json
-        # pdb.set_trace()
-        new_trip["user_id"] = user["_id"]
-
+        new_trip["user_id"] = user_id
         result = trip_collection.insert_one(new_trip)
-
+        # inserted_id is the key word for the trip id whenever we create a new one
         if result.inserted_id != None:
             return(new_trip, 201, None)
         else:
             return(None, 404, None)
-        # if ('trip_name' not in new_trip):
-        #     return(None, 404, None)
-        # else:
-        #     trip_collection.insert_one(new_trip)
-        #     return(new_trip, 201, None)
+
 
 
 
     @auth_function
-    def get(self):
+    def get(self, user_id):
+        # pdb.set_trace()
         trip_collection = app.db.trips
-        # find trip based on user_email
-
-        email = request.authorization.username
-        user_collection = app.db.user
-        user = user_collection.find_one({"email": email})
-
+        # email = request.authorization.username
         trips_result = []
-
-        trips = trip_collection.find({"user_id": ObjectId(user["_id"])})
-
+        trips = trip_collection.find({"user_id": ObjectId(user_id)})
         for trip in trips:
             trips_result.append(trip)
-
         if trips_result is not None:
             return(trips_result, 200, None)
         else:
@@ -207,17 +193,23 @@ class Trip(Resource):
             print('hey dumdum you forgot to put info in frontend')
 
     @auth_function
-    def delete(self):
+    def delete(self, user_id):
         trip_collection = app.db.trips
-        user_email = request.args.get('user_email')
-        if user_email == None:
+        trip_id = request.args.get("trip_id")
+        trip = trip_collection.find({"user_id": ObjectId(user_id)})
+        if trip == None:
             return('error', 404, None)
         else:
-            trip = trip_collection.find_one({"user_email": user_email})
-            trip_collection.remove(trip)
-            return(trip, 204, None)
-
-
+            trip_collection.delete_one({'_id': trip_id})
+            return(None, 200, None)
+        #     trips_result = dumps(list(trip))
+        #     for trip in trips_result:
+        #         if trip["_id"] == trip_id:
+        #             trips_result.remove(trip)
+        #         else:
+        #             return("couldn't find trip that matches id", 404, None)
+        #         pass
+        # return(trip, 200, None)
 
 
 ## Add api routes here
