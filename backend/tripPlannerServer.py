@@ -73,34 +73,12 @@ class User(Resource):
         else:
             return("no sure why but you screwed up", 400, None)
 
-    # def get(self):
-    #     user_email = request.args.get('email')
-    #     user_collection = app.db.user
-    #     json_user = request.args
-    #     jsonPassword = json_user.get('password')
-    #     if user_email is None:
-    #         return("no parameter in url", 404, None)
-    #     else:
-    #         user = user_collection.find_one({"email": user_email})
-    #         # pdb.set_trace()
-    #         if user is None:
-    #             print('no user exists')
-    #             return None
-    #         else:
-    #             encodedPassword = jsonPassword.encode('utf-8')
-    #             # pdb.set_trace()
-    #             if bcrypt.hashpw(encodedPassword, user['password']) == user['password']:
-    #                 user.pop('password')
-    #                 return(user, 200, None)
-    #             else:
-    #                 return('login failed', 404, None)
-
-
     @auth_function
-    def get(self):
+    def get(self,user_id):
         user_collection = app.db.user
-        auth = request.authorization
-        user = user_collection.find_one({"email": auth.username})
+        # auth = request.authorization
+        # user = user_collection.find_one({"email": auth.username})
+        user = user_collection.find_one({"_id": ObjectId(user_id)})
         if user is None:
             print('no user exists')
             return("sorry not matched", 404, None)
@@ -109,31 +87,14 @@ class User(Resource):
             json_user = json.loads(dumps(user))
             return (json_user, 200, None)
 
-
-# # actually can only change username
-    # def patch(self):
-    #     user_collection = app.db.user
-    #     user_email = request.args.get('email')
-    #     user_name = request.args.get('username')
-    #     user_collection = app.db.user
-    #     if user_email == None:
-    #         return ("no email in parameter", 404, None)
-    #     else:
-    #         user = user_collection.find_one({"email": user_email})
-    #         user['email'] = user_email
-    #         user_collection.save(user)
-    #         return(user, 200, None)
     @auth_function
-    def delete(self):
+    def delete(self, user_id):
         user_collection = app.db.user
-        user_email = request.authorization.email
-        if user_email == None:
+        user = user_collection.find_one({"_id": ObjectId(user_id)})
+        if user == None:
             return("no email", 404, None)
         else:
-            user = user_collection.find_one({"email": user_email})
-            pdb.set_trace()
             user_collection.remove(user)
-            pdb.set_trace()
             return('the user has been deleted', 204, None)
 
 
@@ -142,11 +103,13 @@ class Trip(Resource):
 
     @auth_function
     def post(self, user_id):
+        # pdb.set_trace()
         trip_collection = app.db.trips
         # email = request.authorization.username
         new_trip = request.json
-        new_trip["user_id"] = user_id
         result = trip_collection.insert_one(new_trip)
+        new_trip['user_id'] = user_id
+        trip_collection.save(new_trip)
         # inserted_id is the key word for the trip id whenever we create a new one
         if result.inserted_id != None:
             return(new_trip, 201, None)
@@ -170,27 +133,27 @@ class Trip(Resource):
         else:
             return("no trip exist", 404, None)
 
-    @auth_function
-    def patch(self):
-        trip_collection = app.db.trips
-        update_trip = request.json
-        if ('trip_name' in update_trip and 'destination' in update_trip and 'start_time' in update_trip):
-            update_name = update_trip['trip_name']
-            update_destination = update_trip['destination']
-            update_start_time = update_trip['start_time']
-            email = request.args.get("user_email")
-            if email == None:
-                return("error", 404, None)
-            else:
-                trip = trip_collection.find_one({"user_email": email})
-                # pdb.set_trace()
-                trip['trip_name'] = update_name
-                trip['destination'] = update_destination
-                trip['start_time'] = update_start_time
-                trip_collection.save(trip)
-                return('success', 200, None)
-        else:
-            print('hey dumdum you forgot to put info in frontend')
+    # @auth_function
+    # def patch(self, user_id):
+    #     user_collection = app.db.user
+    #     trip_collection = app.db.trips
+    #     update_trip = request.json
+    #     if ('trip_name' in update_trip and 'destination' in update_trip and 'start_time' in update_trip):
+    #         update_name = update_trip['trip_name']
+    #         update_destination = update_trip['destination']
+    #         update_start_time = update_trip['start_time']
+    #         user = user_collection.find_one({"_id": ObjectId(user_id)})
+    #         if user == None:
+    #             return("error", 404, None)
+    #         else:
+    #             trip = trip_collection.find_one({"user_email": email})
+    #             trip['trip_name'] = update_name
+    #             trip['destination'] = update_destination
+    #             trip['start_time'] = update_start_time
+    #             trip_collection.save(trip)
+    #             return('success', 200, None)
+    #     else:
+    #         print('hey dumdum you forgot to put info in frontend')
 
     @auth_function
     def delete(self, user_id):
