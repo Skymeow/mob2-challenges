@@ -19,8 +19,8 @@ struct Alerts {
 }
 
 class LoginViewController: UIViewController {
-//    var user_email: String = ""
-    
+    var user_email: String = ""
+    var user_password: String = ""
     let alert = Alerts()
     var email: String!
     var password: String!
@@ -33,7 +33,6 @@ class LoginViewController: UIViewController {
     let passwordInput = UITextField(frame: CGRect(x: 150, y: 300, width: 0.5*UIScreen.main.bounds.size.width, height: 0.15*UIScreen.main.bounds.size.height))
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         let width = 0.25*UIScreen.main.bounds.size.width
         let height = 0.15*UIScreen.main.bounds.size.height
@@ -58,9 +57,10 @@ class LoginViewController: UIViewController {
     }
     @IBAction func loginTapped(_ sender: Any) {
         print("login tapped")
-        self.email = self.emailInput.text
-        self.password = self.passwordInput.text
-        Networking.instance.fetch(route: Route.users, method: "GET", headers: ["Authorization": BasicAuth.generateBasicAuthHeader(username: self.email, password: self.password),"Content-Type": "application/json"], data: nil) { (data, response) in
+        self.user_email = self.emailInput.text!
+        self.user_password = self.passwordInput.text!
+        
+        Networking.instance.fetch(route: Route.users, method: "GET", headers: ["Authorization": BasicAuth.generateBasicAuthHeader(username: self.user_email, password: self.user_password),"Content-Type": "application/json"], data: nil) { (data, response) in
             print(data,response)
 //            guard let userInfo = try? JSONDecoder().decode(User.self, from: data) else {return}
 //            print(userInfo)
@@ -70,10 +70,14 @@ class LoginViewController: UIViewController {
                 print("successed login")
                 DispatchQueue.main.async {
                     let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                    let tripsViewController = storyBoard.instantiateViewController(withIdentifier: "toTrips") as! TripsViewController
-                    tripsViewController.user_email = self.email
-                    tripsViewController.user_password = self.password
-                    self.present(tripsViewController, animated: true, completion: nil)
+//                    let tripsViewController = storyBoard.instantiateViewController(withIdentifier: "toTrips") as! TripsViewController
+//                    tripsViewController.user_email = self.user_email
+//                    tripsViewController.user_password = self.user_password
+//                    self.present(tripsViewController, animated: true, completion: nil)
+                    let displayTripsTableViewController = storyBoard.instantiateViewController(withIdentifier: "toDisplayTrips") as! DisplayTripsTableViewController
+                    displayTripsTableViewController.user_email = self.user_email
+                    displayTripsTableViewController.user_password = self.user_password
+                    self.present(displayTripsTableViewController, animated: true, completion: nil)
                 }
             } else {
                  DispatchQueue.main.async {

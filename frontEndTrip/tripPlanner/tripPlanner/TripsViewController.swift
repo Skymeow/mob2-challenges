@@ -27,7 +27,7 @@ class TripsViewController: UIViewController {
     
     @IBOutlet weak var waypoint4: UITextField!
     
-    
+   
     @IBAction func addTripTapped(_ sender: Any) {
         
         var waypointsArr = [Waypoint]()
@@ -40,9 +40,9 @@ class TripsViewController: UIViewController {
         waypointsArr.append(point3)
         waypointsArr.append(point4)
         
-        let data = Trip(user_email: self.user_email, completed: false, destination: destination!.text!, trip_name: tripName!.text!, start_time: startTime!.text!, waypoints: waypointsArr)
+        let data = Trip(user_id: "userid", completed: false, destination: destination!.text!, trip_name: tripName!.text!, start_time: startTime!.text!, waypoints: waypointsArr)
         
-        Networking.instance.fetch(route: .trips(user_email: self.user_email), method: "POST", headers: ["Authorization": BasicAuth.generateBasicAuthHeader(username: self.user_email, password: self.user_password),"Content-Type": "application/json"], data: data as! Encodable) { (data, response)  in
+        Networking.instance.fetch(route: .trips, method: "POST", headers: ["Authorization": BasicAuth.generateBasicAuthHeader(username: self.user_email, password: self.user_password),"Content-Type": "application/json"], data:data) { (data, response)  in
             print(response)
             if response == 201 {
                 print("successed post")

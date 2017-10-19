@@ -10,7 +10,7 @@ import Foundation
 
 enum Route {
     case users
-    case trips(user_email: String)
+    case trips
     
     func path()->String {
         switch self {
@@ -30,8 +30,8 @@ enum Route {
         switch self {
         case .users:
             return [:]
-        case let .trips(user_email):
-            return ["user_email": user_email]
+        case let .trips:
+            return [:]
         }
     }
     
