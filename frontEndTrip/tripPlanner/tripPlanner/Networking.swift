@@ -65,7 +65,7 @@ struct BasicAuth {
 //typealias JSON = [String: Any]
 class Networking {
     static let instance = Networking()
-    var baseURL = "http://127.0.0.1:5000/"
+    var baseURL = "https://tripplanner22.herokuapp.com/"
     let session = URLSession.shared
     
     func fetch(route: Route, method: String, headers: [String: String], data: Encodable?, completion: @escaping (Data, Int) -> Void) {

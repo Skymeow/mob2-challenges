@@ -67,6 +67,54 @@
             </objects>
             <point key="canvasLocation" x="250" y="762"/>
         </scene>
+        <!--Choice View Controller-->
+        <scene sceneID="6G6-Nx-uSn">
+            <objects>
+                <viewController storyboardIdentifier="toChoice" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9O2-s5-VNT" customClass="ChoiceViewController" customModule="tripPlanner" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BuP-ZZ-X7J">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uOJ-te-jle">
+                                <rect key="frame" x="38" y="368" width="300" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="seT-pP-mak"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="ypG-i1-AxK"/>
+                                </constraints>
+                                <state key="normal" title="See Trips"/>
+                                <connections>
+                                    <action selector="seeTrips:" destination="9O2-s5-VNT" eventType="touchUpInside" id="W0C-TK-0Hw"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iwf-5d-Wvj">
+                                <rect key="frame" x="38" y="268" width="300" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="cuc-2H-Xfh"/>
+                                    <constraint firstAttribute="height" constant="50" id="erF-6R-3gM"/>
+                                </constraints>
+                                <state key="normal" title="Post Trips"/>
+                                <connections>
+                                    <action selector="postTrips:" destination="9O2-s5-VNT" eventType="touchUpInside" id="lAg-MS-lzA"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Iwf-5d-Wvj" firstAttribute="centerX" secondItem="fuK-bn-t33" secondAttribute="centerX" id="7jd-za-O1X"/>
+                            <constraint firstItem="uOJ-te-jle" firstAttribute="top" secondItem="Iwf-5d-Wvj" secondAttribute="bottom" constant="50" id="8xH-Jc-1aa"/>
+                            <constraint firstItem="Iwf-5d-Wvj" firstAttribute="top" secondItem="fuK-bn-t33" secondAttribute="top" constant="248" id="Rbm-TV-GGx"/>
+                            <constraint firstItem="uOJ-te-jle" firstAttribute="centerX" secondItem="BuP-ZZ-X7J" secondAttribute="centerX" id="koy-HS-MRT"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="fuK-bn-t33"/>
+                    </view>
+                    <connections>
+                        <outletCollection property="PostTrips" destination="Iwf-5d-Wvj" collectionClass="NSMutableArray" id="ALM-FX-L5z"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kr2-k8-Dmi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1268" y="791"/>
+        </scene>
         <!--Trips View Controller-->
         <scene sceneID="ms1-6g-cxC">
             <objects>
@@ -222,12 +270,33 @@
                                     <action selector="addTripTapped:" destination="fQs-7o-35E" eventType="touchUpInside" id="0hW-pT-ZB2"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Completed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IwM-Bo-cf9">
+                                <rect key="frame" x="30" y="432" width="84.5" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="QCc-14-vuR"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="rMz-aV-eZF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bOP-ZA-xsU">
+                                <rect key="frame" x="224.5" y="432" width="102" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="eaG-bo-s0F"/>
+                                    <constraint firstAttribute="width" constant="100" id="ibL-wN-poj"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="switchIsOn:" destination="fQs-7o-35E" eventType="valueChanged" id="apN-67-usX"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.87843137250000003" blue="0.91764705879999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="hen-nU-fVF" firstAttribute="top" secondItem="cGQ-Ik-A5v" secondAttribute="bottom" constant="20" id="0R4-jF-9c0"/>
                             <constraint firstItem="vJs-fR-4cS" firstAttribute="top" secondItem="MDL-V4-w6h" secondAttribute="bottom" constant="20" id="3HS-wZ-ZqM"/>
                             <constraint firstItem="ETh-gp-vqi" firstAttribute="top" secondItem="mw6-lZ-OdH" secondAttribute="bottom" constant="20" id="3dM-Ca-BTR"/>
+                            <constraint firstItem="IwM-Bo-cf9" firstAttribute="top" secondItem="7yk-6G-X2d" secondAttribute="bottom" constant="46" id="7iE-ab-uN6"/>
                             <constraint firstItem="Iw1-3K-OoF" firstAttribute="top" secondItem="m1H-3f-1Oe" secondAttribute="bottom" constant="20" id="8wr-3s-l7o"/>
                             <constraint firstItem="Iw1-3K-OoF" firstAttribute="leading" secondItem="rwo-Ib-PZW" secondAttribute="trailing" constant="110" id="Bv3-qR-bAF"/>
                             <constraint firstItem="fgn-jD-Tvq" firstAttribute="top" secondItem="Iw1-3K-OoF" secondAttribute="bottom" constant="20" id="Czw-fm-TsA"/>
@@ -237,6 +306,7 @@
                             <constraint firstItem="hen-nU-fVF" firstAttribute="leading" secondItem="InN-vv-zFC" secondAttribute="leading" constant="30" id="MEk-kV-Qv8"/>
                             <constraint firstItem="mw6-lZ-OdH" firstAttribute="top" secondItem="hen-nU-fVF" secondAttribute="bottom" constant="20" id="MnR-T6-tR1"/>
                             <constraint firstItem="7yk-6G-X2d" firstAttribute="top" secondItem="rwo-Ib-PZW" secondAttribute="bottom" constant="20" id="QFe-2e-C28"/>
+                            <constraint firstItem="bOP-ZA-xsU" firstAttribute="leading" secondItem="IwM-Bo-cf9" secondAttribute="trailing" constant="110" id="QbI-BT-N9C"/>
                             <constraint firstItem="m1H-3f-1Oe" firstAttribute="top" secondItem="OKU-aX-WUT" secondAttribute="bottom" constant="20" id="SKQ-PI-KoX"/>
                             <constraint firstItem="rwo-Ib-PZW" firstAttribute="leading" secondItem="InN-vv-zFC" secondAttribute="leading" constant="30" id="SNE-5G-QzW"/>
                             <constraint firstItem="m1H-3f-1Oe" firstAttribute="leading" secondItem="ETh-gp-vqi" secondAttribute="trailing" constant="110.5" id="UYx-pE-FHv"/>
@@ -244,6 +314,7 @@
                             <constraint firstItem="TrX-FD-jZA" firstAttribute="leading" secondItem="InN-vv-zFC" secondAttribute="leading" constant="30" id="XFf-t7-3vo"/>
                             <constraint firstItem="vJs-fR-4cS" firstAttribute="leading" secondItem="hen-nU-fVF" secondAttribute="trailing" constant="105" id="XOS-zs-cv1"/>
                             <constraint firstItem="y0N-Fv-WNG" firstAttribute="leading" secondItem="InN-vv-zFC" secondAttribute="leading" constant="164" id="Xpn-6v-czu"/>
+                            <constraint firstItem="bOP-ZA-xsU" firstAttribute="top" secondItem="fgn-jD-Tvq" secondAttribute="bottom" constant="46" id="Xz5-Be-EiC"/>
                             <constraint firstItem="mw6-lZ-OdH" firstAttribute="leading" secondItem="InN-vv-zFC" secondAttribute="leading" constant="30" id="f8Z-8B-3ij"/>
                             <constraint firstItem="InN-vv-zFC" firstAttribute="trailing" secondItem="y0N-Fv-WNG" secondAttribute="trailing" constant="165" id="fZn-bb-gys"/>
                             <constraint firstItem="fgn-jD-Tvq" firstAttribute="leading" secondItem="7yk-6G-X2d" secondAttribute="trailing" constant="110" id="gOQ-rS-Nkj"/>
@@ -255,14 +326,17 @@
                             <constraint firstItem="MDL-V4-w6h" firstAttribute="leading" secondItem="cGQ-Ik-A5v" secondAttribute="trailing" constant="117" id="kYX-HF-8LU"/>
                             <constraint firstItem="rwo-Ib-PZW" firstAttribute="top" secondItem="ETh-gp-vqi" secondAttribute="bottom" constant="20" id="kr5-tL-htM"/>
                             <constraint firstItem="ETh-gp-vqi" firstAttribute="leading" secondItem="InN-vv-zFC" secondAttribute="leading" constant="30" id="msf-4i-ayX"/>
+                            <constraint firstItem="IwM-Bo-cf9" firstAttribute="leading" secondItem="InN-vv-zFC" secondAttribute="leading" constant="30" id="sAS-Ma-3lQ"/>
                             <constraint firstItem="OKU-aX-WUT" firstAttribute="top" secondItem="vJs-fR-4cS" secondAttribute="bottom" constant="20" id="tYG-J6-p5f"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="InN-vv-zFC"/>
                     </view>
                     <connections>
+                        <outlet property="completedSwitch" destination="bOP-ZA-xsU" id="2it-fy-G2S"/>
                         <outlet property="destination" destination="vJs-fR-4cS" id="zzh-TL-yAQ"/>
                         <outlet property="postButton" destination="y0N-Fv-WNG" id="dvP-f7-cvD"/>
                         <outlet property="startTime" destination="MDL-V4-w6h" id="0v1-yb-q4y"/>
+                        <outlet property="switchButton" destination="bOP-ZA-xsU" id="hpn-So-wv9"/>
                         <outlet property="tripName" destination="DoW-ku-9I3" id="RQ2-pt-l2l"/>
                         <outlet property="waypoint1" destination="OKU-aX-WUT" id="jhQ-IX-mcp"/>
                         <outlet property="waypoint2" destination="m1H-3f-1Oe" id="mu9-fV-e5G"/>
@@ -272,7 +346,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V5X-oX-BNs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="941.60000000000002" y="133.5832083958021"/>
+            <point key="canvasLocation" x="1321" y="53"/>
         </scene>
         <!--Display Trips Table View Controller-->
         <scene sceneID="t3z-wr-d70">
@@ -300,6 +374,14 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier2" id="2jO-jf-1pl">
+                                <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2jO-jf-1pl" id="gKV-Lr-efz">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="dpD-K4-UPN" id="olY-VP-DaU"/>
@@ -307,6 +389,7 @@
                         </connections>
                     </tableView>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="PIi-BC-ncU">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
                 </tableViewController>

@@ -62,22 +62,14 @@ class LoginViewController: UIViewController {
         
         Networking.instance.fetch(route: Route.users, method: "GET", headers: ["Authorization": BasicAuth.generateBasicAuthHeader(username: self.user_email, password: self.user_password),"Content-Type": "application/json"], data: nil) { (data, response) in
             print(data,response)
-//            guard let userInfo = try? JSONDecoder().decode(User.self, from: data) else {return}
-//            print(userInfo)
-//            self.user_email = userInfo.email
-
             if response == 200 {
                 print("successed login")
                 DispatchQueue.main.async {
                     let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//                    let tripsViewController = storyBoard.instantiateViewController(withIdentifier: "toTrips") as! TripsViewController
-//                    tripsViewController.user_email = self.user_email
-//                    tripsViewController.user_password = self.user_password
-//                    self.present(tripsViewController, animated: true, completion: nil)
-                    let displayTripsTableViewController = storyBoard.instantiateViewController(withIdentifier: "toDisplayTrips") as! DisplayTripsTableViewController
-                    displayTripsTableViewController.user_email = self.user_email
-                    displayTripsTableViewController.user_password = self.user_password
-                    self.present(displayTripsTableViewController, animated: true, completion: nil)
+                    let choiceViewController = storyBoard.instantiateViewController(withIdentifier: "toChoice") as! ChoiceViewController
+                    choiceViewController.user_email = self.user_email
+                    choiceViewController.user_password = self.user_password
+                    self.present(choiceViewController, animated: true, completion: nil)
                 }
             } else {
                  DispatchQueue.main.async {

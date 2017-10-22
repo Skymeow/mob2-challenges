@@ -11,7 +11,7 @@ import UIKit
 class TripsViewController: UIViewController {
     var user_email: String = ""
     var user_password: String = ""
-    
+    var completedValue: Bool = false
     @IBOutlet weak var postButton: UIButton!
     @IBOutlet weak var tripName: UITextField!
     
@@ -27,7 +27,16 @@ class TripsViewController: UIViewController {
     
     @IBOutlet weak var waypoint4: UITextField!
     
-   
+    
+    @IBOutlet weak var switchButton: UISwitch!
+    @IBAction func switchIsOn(_ sender: Any) {
+        if switchButton.isOn {
+            self.completedValue = true
+        } else {
+            self.completedValue = false
+        }
+        print(self.completedValue)
+    }
     @IBAction func addTripTapped(_ sender: Any) {
         
         var waypointsArr = [Waypoint]()
@@ -40,7 +49,7 @@ class TripsViewController: UIViewController {
         waypointsArr.append(point3)
         waypointsArr.append(point4)
         
-        let data = Trip(user_id: "userid", completed: false, destination: destination!.text!, trip_name: tripName!.text!, start_time: startTime!.text!, waypoints: waypointsArr)
+        let data = Trip(user_id: "userid", completed: self.completedValue, destination: destination!.text!, trip_name: tripName!.text!, start_time: startTime!.text!, waypoints: waypointsArr)
         
         Networking.instance.fetch(route: .trips, method: "POST", headers: ["Authorization": BasicAuth.generateBasicAuthHeader(username: self.user_email, password: self.user_password),"Content-Type": "application/json"], data:data) { (data, response)  in
             print(response)
