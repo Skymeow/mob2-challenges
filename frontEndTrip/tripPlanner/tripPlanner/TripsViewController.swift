@@ -58,8 +58,6 @@ class TripsViewController: UIViewController {
                 DispatchQueue.main.async {
                     let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
                     let displayTripsTableViewController = storyBoard.instantiateViewController(withIdentifier: "toDisplayTrips") as! DisplayTripsTableViewController
-                    displayTripsTableViewController.user_email = self.user_email
-                    displayTripsTableViewController.user_password = self.user_password
                     self.present(displayTripsTableViewController, animated: true, completion: nil)
                 }
             } else {

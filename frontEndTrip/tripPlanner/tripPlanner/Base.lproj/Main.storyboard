@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kwh-z1-n3S">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ExB-3B-XLx">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -20,14 +20,11 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jAx-Dc-gIe">
                                 <rect key="frame" x="190" y="426" width="46" height="30"/>
                                 <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="signupTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OQc-y6-kJW"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="jAx-Dc-gIe" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="190" id="REB-1M-kgm"/>
+                            <constraint firstItem="jAx-Dc-gIe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="REB-1M-kgm"/>
                             <constraint firstAttribute="bottom" secondItem="jAx-Dc-gIe" secondAttribute="bottom" constant="211" id="eKc-KD-19k"/>
                             <constraint firstAttribute="trailing" secondItem="jAx-Dc-gIe" secondAttribute="trailing" constant="139" id="sh4-Kx-KsT"/>
                         </constraints>
@@ -47,7 +44,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vk6-wD-cre">
-                                <rect key="frame" x="148" y="512" width="78" height="30"/>
+                                <rect key="frame" x="148" y="468" width="78" height="30"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="loginTapped:" destination="kwh-z1-n3S" eventType="touchUpInside" id="7fJ-Dd-3TR"/>
@@ -62,63 +59,97 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bRG-Yf-sGL"/>
                     </view>
+                    <navigationItem key="navigationItem" id="7tW-0S-Nif"/>
+                    <connections>
+                        <segue destination="o5W-Os-e4D" kind="show" identifier="toChoice" id="J2K-rZ-g10"/>
+                        <segue destination="dpD-K4-UPN" kind="presentation" identifier="tryToSeepage" id="cWS-8q-B4R"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Edu-o6-zD4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="250" y="762"/>
+            <point key="canvasLocation" x="588" y="761.46926536731644"/>
         </scene>
-        <!--Choice View Controller-->
-        <scene sceneID="6G6-Nx-uSn">
+        <!--Pick View Controller-->
+        <scene sceneID="OGB-Sy-BA3">
             <objects>
-                <viewController storyboardIdentifier="toChoice" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9O2-s5-VNT" customClass="ChoiceViewController" customModule="tripPlanner" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="BuP-ZZ-X7J">
+                <viewController id="o5W-Os-e4D" customClass="PickViewController" customModule="tripPlanner" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3aB-pb-jUA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uOJ-te-jle">
-                                <rect key="frame" x="38" y="368" width="300" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="seT-pP-mak"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="ypG-i1-AxK"/>
-                                </constraints>
-                                <state key="normal" title="See Trips"/>
-                                <connections>
-                                    <action selector="seeTrips:" destination="9O2-s5-VNT" eventType="touchUpInside" id="W0C-TK-0Hw"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iwf-5d-Wvj">
-                                <rect key="frame" x="38" y="268" width="300" height="50"/>
+                                <rect key="frame" x="37" y="219" width="300" height="50"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="aVc-5r-IgZ"/>
+                                    <constraint firstAttribute="height" constant="50" id="cPa-ng-nVo"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="cuc-2H-Xfh"/>
-                                    <constraint firstAttribute="height" constant="50" id="erF-6R-3gM"/>
+                                    <constraint firstAttribute="height" constant="50" id="jdm-cj-09Y"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="kxl-iV-ZzZ"/>
+                                    <constraint firstAttribute="width" constant="300" id="omy-Qo-xug"/>
                                 </constraints>
                                 <state key="normal" title="Post Trips"/>
                                 <connections>
-                                    <action selector="postTrips:" destination="9O2-s5-VNT" eventType="touchUpInside" id="lAg-MS-lzA"/>
+                                    <action selector="postButtonTapped:" destination="o5W-Os-e4D" eventType="touchUpInside" id="22w-Pg-nUn"/>
+                                    <segue destination="fQs-7o-35E" kind="show" identifier="toPostPage" id="qoN-Fr-gBs"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uOJ-te-jle">
+                                <rect key="frame" x="37" y="369" width="300" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="7sT-15-c3z"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="Kfk-TU-Fs0"/>
+                                    <constraint firstAttribute="height" constant="50" id="kJz-Xr-y4U"/>
+                                    <constraint firstAttribute="height" constant="50" id="lcO-e5-9uB"/>
+                                </constraints>
+                                <state key="normal" title="See Trips"/>
+                                <connections>
+                                    <action selector="seeButtonTapped:" destination="o5W-Os-e4D" eventType="touchUpInside" id="bei-0b-eO6"/>
+                                    <segue destination="dpD-K4-UPN" kind="show" identifier="toSeePage" id="SRC-Le-8xZ"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Iwf-5d-Wvj" firstAttribute="centerX" secondItem="fuK-bn-t33" secondAttribute="centerX" id="7jd-za-O1X"/>
-                            <constraint firstItem="uOJ-te-jle" firstAttribute="top" secondItem="Iwf-5d-Wvj" secondAttribute="bottom" constant="50" id="8xH-Jc-1aa"/>
-                            <constraint firstItem="Iwf-5d-Wvj" firstAttribute="top" secondItem="fuK-bn-t33" secondAttribute="top" constant="248" id="Rbm-TV-GGx"/>
-                            <constraint firstItem="uOJ-te-jle" firstAttribute="centerX" secondItem="BuP-ZZ-X7J" secondAttribute="centerX" id="koy-HS-MRT"/>
+                            <constraint firstItem="Iwf-5d-Wvj" firstAttribute="centerX" secondItem="3aB-pb-jUA" secondAttribute="centerX" id="9qi-5b-Jl7"/>
+                            <constraint firstItem="Iwf-5d-Wvj" firstAttribute="centerX" secondItem="3aB-pb-jUA" secondAttribute="centerX" id="C3x-Ix-DLo"/>
+                            <constraint firstItem="rF9-s9-b2d" firstAttribute="trailing" secondItem="uOJ-te-jle" secondAttribute="trailing" constant="38" id="Fyb-Vb-j7H"/>
+                            <constraint firstItem="Iwf-5d-Wvj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="uOJ-te-jle" secondAttribute="leading" id="Mps-fz-1GO"/>
+                            <constraint firstItem="Iwf-5d-Wvj" firstAttribute="leading" secondItem="3aB-pb-jUA" secondAttribute="leading" constant="37" id="NIw-b2-dn1"/>
+                            <constraint firstItem="Iwf-5d-Wvj" firstAttribute="top" secondItem="3aB-pb-jUA" secondAttribute="top" constant="219" id="Onq-of-Kxb"/>
+                            <constraint firstItem="uOJ-te-jle" firstAttribute="trailing" secondItem="Iwf-5d-Wvj" secondAttribute="trailing" id="Qbq-P0-K68"/>
+                            <constraint firstItem="Iwf-5d-Wvj" firstAttribute="leading" secondItem="rF9-s9-b2d" secondAttribute="leading" constant="37" id="RXz-Eh-gyT"/>
+                            <constraint firstItem="Iwf-5d-Wvj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3aB-pb-jUA" secondAttribute="leading" id="SUN-af-THw"/>
+                            <constraint firstItem="rF9-s9-b2d" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Iwf-5d-Wvj" secondAttribute="trailing" id="UZj-M1-asE"/>
+                            <constraint firstItem="Iwf-5d-Wvj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="rF9-s9-b2d" secondAttribute="leading" id="Uib-Aj-sMq"/>
+                            <constraint firstItem="rF9-s9-b2d" firstAttribute="trailing" secondItem="Iwf-5d-Wvj" secondAttribute="trailing" constant="38" id="VgC-hd-g5X"/>
+                            <constraint firstItem="uOJ-te-jle" firstAttribute="top" secondItem="Iwf-5d-Wvj" secondAttribute="bottom" constant="100" id="Wgh-Ps-QtD"/>
+                            <constraint firstItem="Iwf-5d-Wvj" firstAttribute="leading" secondItem="uOJ-te-jle" secondAttribute="leading" id="Yzv-wt-LfC"/>
+                            <constraint firstItem="uOJ-te-jle" firstAttribute="leading" secondItem="rF9-s9-b2d" secondAttribute="leading" constant="37" id="bYh-Mc-gwb"/>
+                            <constraint firstItem="Iwf-5d-Wvj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3aB-pb-jUA" secondAttribute="leading" id="c2e-m0-B5T"/>
+                            <constraint firstItem="uOJ-te-jle" firstAttribute="top" secondItem="3aB-pb-jUA" secondAttribute="top" constant="369" id="dVK-Rk-YAk"/>
+                            <constraint firstItem="Iwf-5d-Wvj" firstAttribute="centerX" secondItem="uOJ-te-jle" secondAttribute="centerX" id="eDy-Vr-z6S"/>
+                            <constraint firstItem="uOJ-te-jle" firstAttribute="centerX" secondItem="Iwf-5d-Wvj" secondAttribute="centerX" id="ijF-jx-RF3"/>
+                            <constraint firstItem="rF9-s9-b2d" firstAttribute="bottom" secondItem="uOJ-te-jle" secondAttribute="bottom" constant="204" id="kGR-8l-emh"/>
+                            <constraint firstAttribute="bottom" secondItem="uOJ-te-jle" secondAttribute="bottom" constant="248" id="l7O-fw-WeZ"/>
+                            <constraint firstItem="Iwf-5d-Wvj" firstAttribute="top" secondItem="3aB-pb-jUA" secondAttribute="top" constant="219" id="llf-Pn-GRZ"/>
+                            <constraint firstItem="uOJ-te-jle" firstAttribute="centerX" secondItem="3aB-pb-jUA" secondAttribute="centerX" id="oIE-7M-Jdy"/>
+                            <constraint firstItem="Iwf-5d-Wvj" firstAttribute="top" secondItem="rF9-s9-b2d" secondAttribute="top" constant="199" id="oRV-DX-Ae5"/>
+                            <constraint firstItem="uOJ-te-jle" firstAttribute="leading" secondItem="3aB-pb-jUA" secondAttribute="leading" constant="37" id="pLy-RF-nv5"/>
+                            <constraint firstItem="Iwf-5d-Wvj" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="uOJ-te-jle" secondAttribute="trailing" id="vvH-J3-iYK"/>
+                            <constraint firstItem="Iwf-5d-Wvj" firstAttribute="leading" secondItem="3aB-pb-jUA" secondAttribute="leading" constant="37" id="y1y-6u-4TX"/>
+                            <constraint firstItem="uOJ-te-jle" firstAttribute="leading" secondItem="3aB-pb-jUA" secondAttribute="leading" constant="37" id="yMc-Pj-Dl6"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="fuK-bn-t33"/>
+                        <viewLayoutGuide key="safeArea" id="rF9-s9-b2d"/>
                     </view>
-                    <connections>
-                        <outletCollection property="PostTrips" destination="Iwf-5d-Wvj" collectionClass="NSMutableArray" id="ALM-FX-L5z"/>
-                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Kr2-k8-Dmi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ap8-EE-yeU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1268" y="791"/>
+            <point key="canvasLocation" x="1370.4000000000001" y="761.46926536731644"/>
         </scene>
         <!--Trips View Controller-->
         <scene sceneID="ms1-6g-cxC">
             <objects>
-                <viewController storyboardIdentifier="toTrips" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fQs-7o-35E" customClass="TripsViewController" customModule="tripPlanner" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="totrips" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fQs-7o-35E" customClass="TripsViewController" customModule="tripPlanner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4Mp-Uq-GD9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -264,7 +295,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y0N-Fv-WNG">
-                                <rect key="frame" x="164" y="515" width="46" height="30"/>
+                                <rect key="frame" x="164" y="471" width="46" height="30"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="addTripTapped:" destination="fQs-7o-35E" eventType="touchUpInside" id="0hW-pT-ZB2"/>
@@ -348,10 +379,10 @@
             </objects>
             <point key="canvasLocation" x="1321" y="53"/>
         </scene>
-        <!--Display Trips Table View Controller-->
+        <!--Title-->
         <scene sceneID="t3z-wr-d70">
             <objects>
-                <tableViewController storyboardIdentifier="toDisplayTrips" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dpD-K4-UPN" customClass="DisplayTripsTableViewController" customModule="tripPlanner" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="todisplaytrips" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dpD-K4-UPN" customClass="DisplayTripsTableViewController" customModule="tripPlanner" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="cPu-ra-q4C">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -388,6 +419,15 @@
                             <outlet property="delegate" destination="dpD-K4-UPN" id="mUt-Ml-WGE"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Title" id="qpR-yL-DAi">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="t8P-fP-keC">
+                            <connections>
+                                <segue destination="kwh-z1-n3S" kind="show" identifier="backToLogin" id="TYC-Fh-RjA"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="PIi-BC-ncU">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -395,7 +435,29 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Kw-Ct-qPu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2295" y="227"/>
+            <point key="canvasLocation" x="2632.8000000000002" y="226.23688155922042"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="d4i-Uc-As9">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ExB-3B-XLx" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="pfw-98-YzO">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="kwh-z1-n3S" kind="relationship" relationship="rootViewController" id="IFI-zf-QNN"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="n1g-BY-rfb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-503" y="694"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="cWS-8q-B4R"/>
+        <segue reference="TYC-Fh-RjA"/>
+    </inferredMetricsTieBreakers>
 </document>
